@@ -119,7 +119,7 @@ public class Tokenizer {
     public static List<Word> segment(String sentence) {
         List<Word> results = new ArrayList<>();
         // 中文分词器
-        List<Term> termList = Xmnlp.segment(sentence).getTerms();
+        List<Term> termList = Xmnlp.segment(sentence);
         results.addAll(termList
                 .stream()
                 .map(term -> new Word(term.word, term.getNature().name()))
