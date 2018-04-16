@@ -30,9 +30,9 @@ public class AnalysisEssayTest {
     }
 
     @Test
-    public void testCN_bajin() throws IOException {
-        String trainSetPath = "data/bajin/A";
-        String saveTrainFeaturesPath = "data/bajin_novels_A_features.arff";
+    public void testCN_law() throws IOException {
+        String trainSetPath = "data/law";
+        String saveTrainFeaturesPath = "data/law_features.arff";
 
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
         // Parse the input training file

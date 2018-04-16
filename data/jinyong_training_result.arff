@@ -1,0 +1,141 @@
+自动生成评分:
+目录：data/jinyong_training_result.arff
+特征： Adverb_TTR
+特征： AverageIDF
+特征： AverageIDF_MinMaxNorm_Task
+特征： AverageIDF_abs_zscore_gaussiannorm_task
+特征： AverageIDF_zscore_gaussiannorm_task
+特征： AverageSentenceLength
+特征： AverageWordLength
+特征： AverageWordLength_MinMaxNorm_Task
+特征： FourLengthWordCount
+特征： FourLengthWordRatio
+特征： MoreThanEightWordSentenceCount
+特征： MoreThanEightWordSentenceRatio
+特征： MoreThanNineWordSentenceCount
+特征： MoreThanNineWordSentenceRatio
+特征： MoreThanSevenWordSentenceCount
+特征： MoreThanSevenWordSentenceRatio
+特征： Num_Chars
+特征： Num_PrePosition
+特征： Num_Pronoun
+特征： Num_Sentences
+特征： Num_Words
+特征： OOVs
+特征： OOVs_MinMaxNorm_Task
+特征： OneLengthWordCount
+特征： OneLengthWordRatio
+特征： PercentMatches_是
+特征： PercentMatches_这
+特征： PercentMatches_这_abs_zscore_gaussiannorm_task
+特征： PercentMatches_这_normal_prob_gaussiannorm_task
+特征： PercentMatches_这_zscore_gaussiannorm_task
+特征： PercentMatches_！
+特征： PercentMatches_，
+特征： PercentMatches_？
+特征： TTR
+特征： ThreeLengthWordCount
+特征： ThreeLengthWordRatio
+特征： TwoLengthWordCount
+特征： TwoLengthWordRatio
+特征： Verb_TTR
+特征： obvious_typos
+特征： obvious_typos_MinMaxNorm_Task
+特征： overlap_coherence
+特征： overlap_coherence_abs_zscore_gaussiannorm_task
+特征： overlap_coherence_zscore_gaussiannorm_task
+特征： stopword_ratio
+特征值：
+@data
+Adverb_TTR:0.4393886122315909
+AverageIDF:0.04671992556291284
+AverageIDF_MinMaxNorm_Task:1.0
+AverageIDF_abs_zscore_gaussiannorm_task:0.7071067811865475
+AverageIDF_zscore_gaussiannorm_task:0.7071067811865475
+AverageSentenceLength:6.048796543344748
+AverageWordLength:1.3608567293777134
+AverageWordLength_MinMaxNorm_Task:1.0
+FourLengthWordCount:6072.0
+FourLengthWordRatio:0.0070298118668596235
+MoreThanEightWordSentenceCount:23915.0
+MoreThanEightWordSentenceRatio:0.16747550718852636
+MoreThanNineWordSentenceCount:15335.0
+MoreThanNineWordSentenceRatio:0.10739021127894843
+MoreThanSevenWordSentenceCount:36270.0
+MoreThanSevenWordSentenceRatio:0.25399693270867035
+Num_Chars:1175440.0
+Num_PrePosition:19729.0
+Num_Pronoun:3211.0
+Num_Sentences:142797.0
+Num_Words:863750.0
+OOVs:0.0576347322720695
+OOVs_MinMaxNorm_Task:0.0
+OneLengthWordCount:587496.0
+OneLengthWordRatio:0.6801690303907381
+PercentMatches_\Q是\E:0.011601736613603473
+PercentMatches_\Q这\E:0.00734356005788712
+PercentMatches_\Q这\E_abs_zscore_gaussiannorm_task:0.7071067811865452
+PercentMatches_\Q这\E_normal_prob_gaussiannorm_task:1618.143927930899
+PercentMatches_\Q这\E_zscore_gaussiannorm_task:0.7071067811865452
+PercentMatches_\Q！\E:0.0031062228654124458
+PercentMatches_\Q，\E:0.09954500723589002
+PercentMatches_\Q？\E:0.006689435600578871
+TTR:5.2033676189502085
+ThreeLengthWordCount:23014.0
+ThreeLengthWordRatio:0.026644283646888568
+TwoLengthWordCount:247088.0
+TwoLengthWordRatio:0.2860642547033285
+Verb_TTR:0.7408569912613229
+obvious_typos:0.057634732272069465
+obvious_typos_MinMaxNorm_Task:0.0
+overlap_coherence:0.2990668596237337
+overlap_coherence_abs_zscore_gaussiannorm_task:0.7071067811865475
+overlap_coherence_zscore_gaussiannorm_task:-0.7071067811865475
+stopword_ratio:0.48053950795947903
+-1.0
+Adverb_TTR:0.339005695801983
+AverageIDF:0.04176034922559574
+AverageIDF_MinMaxNorm_Task:0.0
+AverageIDF_abs_zscore_gaussiannorm_task:0.7071067811865475
+AverageIDF_zscore_gaussiannorm_task:-0.7071067811865475
+AverageSentenceLength:6.29411125302318
+AverageWordLength:1.3457489447377926
+AverageWordLength_MinMaxNorm_Task:0.0
+FourLengthWordCount:3705.0
+FourLengthWordRatio:0.005332078388028513
+MoreThanEightWordSentenceCount:20993.0
+MoreThanEightWordSentenceRatio:0.19015915287553103
+MoreThanNineWordSentenceCount:13878.0
+MoreThanNineWordSentenceRatio:0.1257099377700481
+MoreThanSevenWordSentenceCount:31027.0
+MoreThanSevenWordSentenceRatio:0.2810493038760111
+Num_Chars:935095.0
+Num_PrePosition:16354.0
+Num_Pronoun:3748.0
+Num_Sentences:110397.0
+Num_Words:694851.0
+OOVs:0.06571768623776897
+OOVs_MinMaxNorm_Task:1.0
+OneLengthWordCount:482963.0
+OneLengthWordRatio:0.695059804188236
+PercentMatches_\Q是\E:0.010587881430695214
+PercentMatches_\Q这\E:0.0070720197567536065
+PercentMatches_\Q这\E_abs_zscore_gaussiannorm_task:0.7071067811865498
+PercentMatches_\Q这\E_normal_prob_gaussiannorm_task:1618.1439279308938
+PercentMatches_\Q这\E_zscore_gaussiannorm_task:-0.7071067811865498
+PercentMatches_\Q！\E:0.002449445996335905
+PercentMatches_\Q，\E:0.09594431036294113
+PercentMatches_\Q？\E:0.006584145377929945
+TTR:4.14998945221855
+ThreeLengthWordCount:20749.0
+ThreeLengthWordRatio:0.029861078130419327
+TwoLengthWordCount:187389.0
+TwoLengthWordRatio:0.26968227720763155
+Verb_TTR:0.6212195792394091
+obvious_typos:0.06571768623776895
+obvious_typos_MinMaxNorm_Task:1.0
+overlap_coherence:0.40894954457862187
+overlap_coherence_abs_zscore_gaussiannorm_task:0.7071067811865475
+overlap_coherence_zscore_gaussiannorm_task:0.7071067811865475
+stopword_ratio:0.4663935145808238
+-1.0
