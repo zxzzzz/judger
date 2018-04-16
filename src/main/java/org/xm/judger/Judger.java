@@ -35,4 +35,5 @@ public class Judger {
     public static double cilinSimilarity(String word1, String word2) {
         return 0.0;
     }
+
 }

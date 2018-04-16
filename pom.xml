@@ -78,12 +78,7 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-        <!-- 分词器:自动引入xmnlp.jar -->
-        <dependency>
-            <groupId>org.xm</groupId>
-            <artifactId>xmnlp</artifactId>
-            <version>1.4</version>
-        </dependency>
+
         <!-- 测试包 -->
         <dependency>
             <groupId>junit</groupId>
