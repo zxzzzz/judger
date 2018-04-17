@@ -1,5 +1,6 @@
 package org.xm.judger.util;
 
+import lombok.Data;
 import org.xm.xmnlp.Xmnlp;
 import org.xm.xmnlp.seg.domain.Term;
 
@@ -9,9 +10,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
+ * 分词器
  * @author xuming
  */
+@Data
 public class Tokenizer {
+    @Data
     public static class Word implements Comparable {
         // 词名
         private String name;
@@ -19,6 +23,7 @@ public class Tokenizer {
         private String pos;
         // 权重，用于词向量分析
         private Float weight;
+
         private int frequency;
 
         public Word(String name) {
@@ -28,38 +33,6 @@ public class Tokenizer {
         public Word(String name, String pos) {
             this.name = name;
             this.pos = pos;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getPos() {
-            return pos;
-        }
-
-        public void setPos(String pos) {
-            this.pos = pos;
-        }
-
-        public Float getWeight() {
-            return weight;
-        }
-
-        public void setWeight(Float weight) {
-            this.weight = weight;
-        }
-
-        public int getFrequency() {
-            return frequency;
-        }
-
-        public void setFrequency(int frequency) {
-            this.frequency = frequency;
         }
 
         @Override
@@ -125,12 +98,9 @@ public class Tokenizer {
         List<Word> results = new ArrayList<>();
         // 中文分词器
         List<Term> termList = Xmnlp.segment(sentence);
-        results.addAll(termList
-                .stream()
-                .map(term -> new Word(term.word, term.getNature().name()))
-                .collect(Collectors.toList())
-        );
-
+        results = termList.stream()
+                .map(term -> new Word(term.word,term.getNature().name()))
+                .collect(Collectors.toList());
         return results;
     }
 }

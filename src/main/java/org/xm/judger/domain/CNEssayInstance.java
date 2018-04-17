@@ -20,6 +20,10 @@ public class CNEssayInstance extends EssayInstance {
 
     private static final Pattern paragraphPattern = Pattern.compile("\\s{2,}");
 
+    /**
+     * 得到段落
+     * @return
+     */
     @Override
     public ArrayList<ArrayList<ArrayList<String>>> getParagraphs() {
         if (cachedParse != null) return cachedParse;
@@ -78,7 +82,7 @@ public class CNEssayInstance extends EssayInstance {
 
     /**
      * print essay instance info
-     *
+     * 输出文章信息
      * @param instances 实例
      */
     public static void printEssayInstances(ArrayList<CNEssayInstance> instances, String outFile) {

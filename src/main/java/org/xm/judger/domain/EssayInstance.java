@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Essay instance
+ * 文章
  *
  * @author xuming
  */
 public abstract class EssayInstance {
-    //storing all the fields available in the training set file
+    //存储所有在训练集中可用的字段
     public int id;
     public int set;
     public String essay;
@@ -82,6 +82,10 @@ public abstract class EssayInstance {
         return features.get(feature);
     }
 
+    /**
+     * 罗列特证名称
+     * @return
+     */
     public List<String> listFeatures() {
         ArrayList<String> fList = new ArrayList<>(features.keySet());
         Collections.sort(fList);
@@ -89,14 +93,14 @@ public abstract class EssayInstance {
     }
 
     /**
-     * Paragraphs
+     * 解析到段落层级
      *
      * @return the parsed structure of the text at the paragraph, sentence, word levels
      */
     public abstract ArrayList<ArrayList<ArrayList<String>>> getParagraphs();
 
     /**
-     * get token(String) from paragraphs
+     * 解析到词语层级
      *
      * @return the parsed the paragraph to word levels
      */

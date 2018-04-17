@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 /**
  * Parse the CN essay instance
- *
+ *  解析中文文章
  * @author xuming
  */
 public class CNEssayInstanceParser {
@@ -24,7 +24,7 @@ public class CNEssayInstanceParser {
 
     /**
      * Load documents from disk
-     *
+     * 加载文章
      * @param folderPath is a folder, which contains text documents.
      * @return a corpus
      * @throws IOException
@@ -54,6 +54,12 @@ public class CNEssayInstanceParser {
         return essayInstances;
     }
 
+    /**
+     * 文章解析为不同的段落
+     * @param filename
+     * @param header
+     * @return
+     */
     public ArrayList<CNEssayInstance> parse(String filename, boolean header) {
         ArrayList<CNEssayInstance> essayInstances = new ArrayList<>();
         BufferedReader br;

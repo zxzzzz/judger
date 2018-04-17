@@ -1,6 +1,7 @@
 package org.xm.judger.domain;
 
 /**
+ * 路径配置
  * @author xuming
  */
 public class Config {
@@ -16,7 +17,6 @@ public class Config {
     /**
      * 英文作文训练集路径
      */
-//    public static String ENTrainSetPath ="Phase1/training_set_rel3.tsv";
     public static String ENTrainSetPath = "Phase1/training_set_rel4.tsv";
 
     public static String ENTrainTestSetPath = "Phase1/training_set1.test.tsv";
