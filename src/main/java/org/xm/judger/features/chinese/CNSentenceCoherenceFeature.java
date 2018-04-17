@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 /**
  * Feature for sentence-transition coherence.  More or less average keyword overlap.
- *
+ * 句子连贯性特征，关键字重复率指数
  * @author xuming
  */
 public class CNSentenceCoherenceFeature implements CNFeatures {
@@ -27,6 +27,7 @@ public class CNSentenceCoherenceFeature implements CNFeatures {
                 HashSet<String> words = new HashSet<>();
                 for (String token : sentence) {
                     token = token.toLowerCase();
+                    //重复词计算
                     if (partParagraph.contains(token))
                         overlap++;
                     numWords++;
@@ -38,7 +39,7 @@ public class CNSentenceCoherenceFeature implements CNFeatures {
         }
         result.put("overlap_coherence", new Double(overlap / (double) numWords));
         if (Config.DEBUG)
-            System.out.println("Overlap coherence for ID(" + instance.id + ") @ score("
+            System.out.println("关键字重复率  Overlap coherence for ID(" + instance.id + ") @ score("
                     + instance.domain1_score + "): " + result.get("overlap_coherence"));
 
         return result;

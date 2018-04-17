@@ -10,10 +10,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 过拟合与高斯正规化
  * @author xuming
  */
 public class CNGaussianNormailizerFeature implements CNFeatures {
+    /**
+     * 含义
+     */
     private HashMap<Integer, double[]> means;
+    /**
+     * 标准偏差
+     */
     private HashMap<Integer, double[]> stddev;
     private CNFeatures baseFeature;
     private String baseName;
@@ -28,7 +35,7 @@ public class CNGaussianNormailizerFeature implements CNFeatures {
 
     /**
      * Learn the mean and stddev of the feature
-     *
+     *  学习特征的含义与标准偏差
      * @param trainingSample the instance
      * @param base
      * @param baseName
@@ -113,6 +120,7 @@ public class CNGaussianNormailizerFeature implements CNFeatures {
         else if (type == Type.NORMAL_PROB)
             core = (Math.exp(-Math.pow(core, 2) / 2)) / (tempStddev * Math.sqrt(2 * Math.PI));
         values.put(name, core);
+        System.out.println("高斯正规化  name:"+name +"分数:"+core);
         return values;
     }
 }

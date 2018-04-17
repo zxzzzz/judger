@@ -25,15 +25,16 @@ public class CNEssayInstance extends EssayInstance {
         if (cachedParse != null) return cachedParse;
         cachedParse = new ArrayList<>();
         String[] paragraphs = paragraphPattern.split(essay);
+        //段落
         for (String paragraph : paragraphs) {
             ArrayList<ArrayList<String>> sentenceList = new ArrayList<>();
             cachedParse.add(sentenceList);
-            // get sentence
+            // 句子
             List<String> sentences = splitSentence(paragraph);
             for (String sentence : sentences) {
                 ArrayList<String> wordList = new ArrayList<>();
                 sentenceList.add(wordList);
-                // get token
+                // 单词
                 List<Tokenizer.Word> tokens = Tokenizer.segment(sentence);
                 for (Tokenizer.Word token : tokens) {
                     if (token == null || token.getName().length() == 0)

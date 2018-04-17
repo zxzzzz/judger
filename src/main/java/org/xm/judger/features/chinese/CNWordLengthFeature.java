@@ -50,7 +50,7 @@ public class CNWordLengthFeature implements CNFeatures {
         values.put("FourLengthWordRatio", new Double(fourLengthWordCount / (double) numWords));
 
         if (Config.DEBUG)
-            System.out.println("Average word length for ID(" + instance.id + "): " + (sumLength / (double) numWords));
+            System.out.println("平均词长  Average word length for ID(" + instance.id + "): " + (sumLength / (double) numWords));
         return values;
     }
 }

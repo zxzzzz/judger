@@ -71,6 +71,11 @@ public abstract class EssayInstance {
         return this.features;
     }
 
+    /**
+     * 得到特征分数
+     * @param feature
+     * @return
+     */
     public double getFeature(String feature) {
         if (feature.equals("grade"))
             return domain1_score;

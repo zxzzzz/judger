@@ -16,11 +16,11 @@ public class CNSentenceLengthFeature implements CNFeatures {
 
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
-        int numSentences = 0;
-        int sumCount = 0;
-        int moreThanSevenWordSentenceCount = 0;
-        int moreThanEightWordSentenceCount = 0;
-        int moreThanNineWordSentenceCount = 0;
+        int numSentences = 0;//句子数
+        int sumCount = 0;//总句长
+        int moreThanSevenWordSentenceCount = 0;//句长是大于7个词的句数
+        int moreThanEightWordSentenceCount = 0;//句长是大于8个词的句数
+        int moreThanNineWordSentenceCount = 0;//句长是大于9个词的句数
         // compute the word length of longest essay
         ArrayList<ArrayList<ArrayList<String>>> pargraphs = instance.getParagraphs();
         for (ArrayList<ArrayList<String>> pargraph : pargraphs) {
@@ -45,7 +45,11 @@ public class CNSentenceLengthFeature implements CNFeatures {
         values.put("MoreThanNineWordSentenceRatio", new Double(moreThanNineWordSentenceCount / (double) numSentences));
 
         if (Config.DEBUG) {
-            System.out.println("numSentences for ID(" + instance.id + "): " + (double) numSentences);
+            System.out.println("句子数  numSentences for ID(" + instance.id + "): " + values.get("Num_Sentences"));
+            System.out.println("平均句长  AverageSentenceLength for ID(" + instance.id + "): " + values.get("AverageSentenceLength"));
+            System.out.println("句长是大于7个词的比例 MoreThanSevenWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanSevenWordSentenceRatio"));
+            System.out.println("句长是大于8个词的比例  MoreThanEightWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanEightWordSentenceRatio"));
+            System.out.println("句长是大于9个词的比例  MoreThanNineWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanNineWordSentenceRatio"));
         }
         return values;
     }

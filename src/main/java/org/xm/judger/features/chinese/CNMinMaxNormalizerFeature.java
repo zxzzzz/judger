@@ -20,12 +20,13 @@ public class CNMinMaxNormalizerFeature implements CNFeatures {
 
     /**
      * Learns the min-max range of the feature for each task
-     *
+     * 学习每个任务特征的 min-max范围
      * @param trainingSample
      * @param base
      * @param baseName
      */
     public CNMinMaxNormalizerFeature(ArrayList<CNEssayInstance> trainingSample, CNFeatures base, String baseName) {
+        //todo I don't understand  CNMinMaxNormalizerFeature
         min = new HashMap<>();
         max = new HashMap<>();
         this.baseFeature = base;
@@ -44,6 +45,11 @@ public class CNMinMaxNormalizerFeature implements CNFeatures {
         }
     }
 
+    /**
+     * 得到basename特征的分数
+     * @param instance
+     * @return
+     */
     private double getBaseValue(CNEssayInstance instance) {
         Double value = instance.getFeature(baseName);
         if (value == null) {

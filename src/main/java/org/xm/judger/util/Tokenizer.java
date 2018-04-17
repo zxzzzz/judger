@@ -116,6 +116,11 @@ public class Tokenizer {
         }
     }
 
+    /**
+     * 中文分词
+     * @param sentence
+     * @return
+     */
     public static List<Word> segment(String sentence) {
         List<Word> results = new ArrayList<>();
         // 中文分词器

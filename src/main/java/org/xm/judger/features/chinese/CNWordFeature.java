@@ -17,7 +17,7 @@ import java.util.HashMap;
  * <p>
  * 类符形符比：一个语料库有100万词，指的是100万tokens，即100万词次。但这100万词次的语料库中，或许只用到了5万个单词。
  * 这5万个词，就是types，词种。
- *
+ * 
  * @author xuming
  */
 public class CNWordFeature implements CNFeatures {
@@ -30,9 +30,9 @@ public class CNWordFeature implements CNFeatures {
         HashMap<String, Double> result = new HashMap<>();
         int numChars = 0; // 总字数
         int numWords = 0; // 总词语数
-        int matches = 0;
-        int numTypos = 0;
-        int wordTotalSize = 0; // 分词词典的词语总数
+        int matches = 0;  //词典中可匹配的单词
+        int numTypos = 0; //明显错误词
+        int wordTotalSize = 0; // 分词词典的词语总数：核心词典词语数+用户自定义词典词语数
         int numVerb = 0; // 动词
         int numAdverb = 0; // 副词
         int numPrePosition = 0; // 介词
@@ -59,7 +59,7 @@ public class CNWordFeature implements CNFeatures {
             }
         }
         result.put("OOVs", new Double(1 - matches / (double) numWords)); // 未登录词 占比
-        result.put("obvious_typos", new Double(numTypos / (double) numWords)); // 明显错误词 占比
+        result.put("obvious_typos", new Double(numTypos / (double) numWords)); // 明显错误词占比
         result.put("TTR", new Double(matches / (double) wordTotalSize)); // 类符形符比
         result.put("Verb_TTR", new Double(numVerb / (double) wordTotalSize)); // 动词的类符形符比
         result.put("Adverb_TTR", new Double(numAdverb / (double) wordTotalSize)); // 副词的类符形符比
@@ -68,14 +68,14 @@ public class CNWordFeature implements CNFeatures {
         result.put("Num_Chars", new Double(numChars)); // 总字数
         result.put("Num_Words", new Double(numWords)); // 总词数
         if (Config.DEBUG) {
-            System.out.println("OOVs for ID(" + instance.id + "): " + result.get("OOVs"));
-            System.out.println("Obvious typos for ID(" + instance.id + "): " + result.get("obvious_typos"));
-            System.out.println("TTR for ID(" + instance.id + "): " + result.get("TTR"));
-            System.out.println("Verb_TTR for ID(" + instance.id + "): " + result.get("Verb_TTR"));
-            System.out.println("Adverb_TTR for ID(" + instance.id + "): " + result.get("Adverb_TTR"));
-            System.out.println("Num_PrePosition for ID(" + instance.id + "): " + result.get("Num_PrePosition"));
-            System.out.println("Num_Pronoun for ID(" + instance.id + "): " + result.get("Num_Pronoun"));
-            System.out.println("Num_Chars for ID(" + instance.id + "): " + result.get("Num_Chars"));
+            System.out.println("未登录词        OOVs for ID(" + instance.id + "): " + result.get("OOVs"));
+            System.out.println("明显错误词占比   Obvious typos  for ID(" + instance.id + "): " + result.get("obvious_typos"));
+            System.out.println("类符形符比      TTR for ID(" + instance.id + "): " + result.get("TTR"));
+            System.out.println("动词的类符形符比 Verb_TTR for ID(" + instance.id + "): " + result.get("Verb_TTR"));
+            System.out.println("副词的类符形符比 Adverb_TTR for ID(" + instance.id + "): " + result.get("Adverb_TTR"));
+            System.out.println("介词数          Num_PrePosition for ID(" + instance.id + "): " + result.get("Num_PrePosition"));
+            System.out.println("代词数          Num_Pronoun for ID(" + instance.id + "): " + result.get("Num_Pronoun"));
+            System.out.println("总字数          Num_Chars for ID(" + instance.id + "): " + result.get("Num_Chars"));
         }
         return result;
     }

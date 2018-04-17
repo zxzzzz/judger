@@ -52,6 +52,7 @@ public class CNStopWordRatioFeature implements CNFeatures {
             }
         }
         result.put("stopword_ratio", numStopwords / (double) numWords);
+        System.out.println("停用词比例 stopword ratio :"+numStopwords/(double)numWords);
         return result;
     }
 }

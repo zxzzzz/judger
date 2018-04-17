@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /**
+ * 文本相似度计算 TF-IDF：关键词--词向量--计算相似度
  * @author xuming
  */
 public class CNIDFFeature implements CNFeatures {
@@ -24,6 +25,7 @@ public class CNIDFFeature implements CNFeatures {
         idf = new HashMap<>();
         // 1.doc frequency
         for (EssayInstance instance : instances) {
+            //找出关键词---set过滤掉重复的
             HashSet<String> words = new HashSet<>();
             ArrayList<ArrayList<ArrayList<String>>> paragraphs = instance.getParagraphs();
             for (ArrayList<ArrayList<String>> paragraph : paragraphs) {
@@ -60,7 +62,7 @@ public class CNIDFFeature implements CNFeatures {
         HashMap<String, Double> values = new HashMap<>();
         values.put("AverageIDF", new Double(sumIdf / (double) numWords));
         if (Config.DEBUG)
-            System.out.println("AverageIDF for ID(" + instance.id + "): " + values.get("AverageIDF"));
+            System.out.println("平均相似度  AverageIDF for ID(" + instance.id + "): " + values.get("AverageIDF"));
         return values;
     }
 }

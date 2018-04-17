@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * Compute the percentage of tokens match the input word or regex.
- *
+ * token匹配输入词或正则表达式的百分率
  * @author xuming
  */
 public class CNPercentMatchesFeature implements CNFeatures {
@@ -44,7 +44,7 @@ public class CNPercentMatchesFeature implements CNFeatures {
         }
         result.put("PercentMatches_" + pattern, new Double(matches / (double) numWords));
         if (Config.DEBUG)
-            System.out.println("Percent matches(" + pattern + ") for ID(" + instance.id + "): "
+            System.out.println("正则匹配率  Percent matches(匹配模式：" + pattern + ") for ID(" + instance.id + "): 匹配率："
                     + (matches / (double) numWords));
         return result;
     }
