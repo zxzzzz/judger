@@ -21,8 +21,8 @@ public class JudgerTest {
     public void testEN() {
         ENEssayInstanceParser parser = new ENEssayInstanceParser();
         // Parse the input training file
-        ArrayList<ENEssayInstance> instances = parser.parse(Config.ENTrainSetPath, true);
-        Judger.setENInstances(instances);
+        ArrayList<ENEssayInstance> instances = parser.parse(Config.EN_TRAIN_SET_PATH, true);
+        Judger.setEninstances(instances);
         ENEssayInstance.printEssayInstances(instances, "data/examples.utf8");
 
         // Get feature Scores for each instance
@@ -36,8 +36,8 @@ public class JudgerTest {
     public void testEN_testFile() {
         ENEssayInstanceParser parser = new ENEssayInstanceParser();
         // Parse the input training file
-        ArrayList<ENEssayInstance> instances = parser.parse(Config.ENTrainTestSetPath, true);
-        Judger.setENInstances(instances);
+        ArrayList<ENEssayInstance> instances = parser.parse(Config.EN_TRAIN_TEST_SET_PATH, true);
+        Judger.setEninstances(instances);
         ENEssayInstance.printEssayInstances(instances, "data/examples_test.utf8");
 
         // Get feature Scores for each instance
@@ -92,7 +92,7 @@ public class JudgerTest {
         ENEssayInstanceParser parser = new ENEssayInstanceParser();
         // Parse the input training file
         ArrayList<ENEssayInstance> instances = parser.parse(inputPath, true);
-        Judger.setENInstances(instances);
+        Judger.setEninstances(instances);
         ENEssayInstance.printEssayInstances(instances, "data/examples.utf8");
 
         // Get feature Scores for each instance

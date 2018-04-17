@@ -1,5 +1,6 @@
 package org.xm.judger;
 
+import lombok.Data;
 import org.xm.judger.domain.CNEssayInstance;
 import org.xm.judger.domain.ENEssayInstance;
 
@@ -8,24 +9,25 @@ import java.util.ArrayList;
 /**
  * @author xuming
  */
+@Data
 public class Judger {
     private static ArrayList<ENEssayInstance> eninstances;
 
-    public static ArrayList<ENEssayInstance> getENInstances() {
+    public static ArrayList<ENEssayInstance> getEninstances() {
         return eninstances;
     }
 
-    public static void setENInstances(ArrayList<ENEssayInstance> instances) {
+    public static void setEninstances(ArrayList<ENEssayInstance> instances) {
         Judger.eninstances = instances;
     }
 
     private static ArrayList<CNEssayInstance> cninstances;
 
-    public static ArrayList<CNEssayInstance> getCNInstances() {
+    public static ArrayList<CNEssayInstance> getCninstances() {
         return cninstances;
     }
 
-    public static void setCNInstances(ArrayList<CNEssayInstance> instances) {
+    public static void setCninstances(ArrayList<CNEssayInstance> instances) {
         Judger.cninstances = instances;
     }
 

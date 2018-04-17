@@ -17,7 +17,7 @@ import java.util.HashSet;
  */
 public class CNStopWordRatioFeature implements CNFeatures {
     HashSet<String> stopwords;
-    private static final String PATH = Config.StopwordsPath;
+    private static final String PATH = Config.STOP_WORDS_PATH;
 
     public CNStopWordRatioFeature() throws IOException {
         this(PATH);

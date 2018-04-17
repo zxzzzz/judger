@@ -25,7 +25,7 @@ public class ENWordFeature implements ENFeatures {
     HashSet<String> typos = null;
     HashSet<String> typosLC = null;
 
-    private static final String PATH = Config.ENSpellCheckingWordsPath;
+    private static final String PATH = Config.EN_SPELL_CHECKING_WORDS_PATH;
 
     public ENWordFeature() throws IOException {
         this(PATH);

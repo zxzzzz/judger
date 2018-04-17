@@ -20,7 +20,7 @@ public class AnalysisEssayTest {
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
         // Parse the input training file
         ArrayList<CNEssayInstance> instances = parser.load(trainSetPath);
-        Judger.setCNInstances(instances);
+        Judger.setCninstances(instances);
 
         // Get feature Scores for each instance
         ArrayList<CNEssayInstance> instancesFeatures = FeatureHandler.getFeatures(instances);
@@ -37,7 +37,7 @@ public class AnalysisEssayTest {
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
         // Parse the input training file
         ArrayList<CNEssayInstance> instances = parser.load(trainSetPath);
-        Judger.setCNInstances(instances);
+        Judger.setCninstances(instances);
 
         ArrayList<CNEssayInstance> instancesFeatures = FeatureHandler.getFeatures(instances);
         FeatureHandler.saveFeatures(instancesFeatures, saveTrainFeaturesPath);

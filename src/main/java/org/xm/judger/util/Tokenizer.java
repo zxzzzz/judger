@@ -99,8 +99,8 @@ public class Tokenizer {
         // 中文分词器
         List<Term> termList = Xmnlp.segment(sentence);
         results = termList.stream()
-                .map(term -> new Word(term.word,term.getNature().name()))
-                .collect(Collectors.toList());
+                          .map(term -> new Word(term.word,term.getNature().name()))
+                          .collect(Collectors.toList());
         return results;
     }
 }

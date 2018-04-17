@@ -26,7 +26,7 @@ public class ENLengthFeature implements ENFeatures {
 
     private int getMaxWordCount() {
         if (maxWordCount == -1) {
-            ArrayList<ENEssayInstance> instances = Judger.getENInstances();
+            ArrayList<ENEssayInstance> instances = Judger.getEninstances();
             // compute the word length of longest essay
             for (ENEssayInstance instance : instances) {
                 String essay = instance.essay;

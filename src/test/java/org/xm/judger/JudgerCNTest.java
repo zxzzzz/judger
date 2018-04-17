@@ -20,8 +20,8 @@ public class JudgerCNTest {
     @Test
     public void testCN() {
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
-        ArrayList<CNEssayInstance> instances = parser.parse(Config.CNTrainSetPath, true);
-        Judger.setCNInstances(instances);
+        ArrayList<CNEssayInstance> instances = parser.parse(Config.CN_TRAIN_SET_PATH, true);
+        Judger.setCninstances(instances);
         CNEssayInstance.printEssayInstances(instances, "data/cn_examples.utf8");
         ArrayList<CNEssayInstance> instancesFeatures = CNFeatureBuilder.buildFeatures(instances,4);
         CNFeatureBuilder.saveAllFeatures(instancesFeatures,4);
@@ -31,7 +31,7 @@ public class JudgerCNTest {
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
         // Parse the input training file
         ArrayList<CNEssayInstance> instances = parser.parse(inputPath, true);
-        Judger.setCNInstances(instances);
+        Judger.setCninstances(instances);
         CNEssayInstance.printEssayInstances(instances, "data/examples.utf8");
 
         // Get feature Scores for each instance
