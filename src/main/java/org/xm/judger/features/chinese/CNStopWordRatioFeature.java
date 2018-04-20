@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 /**
  * Stop word num / all word num
- *
+ * 停用词占比
  * @author xuming
  */
 public class CNStopWordRatioFeature implements CNFeatures {

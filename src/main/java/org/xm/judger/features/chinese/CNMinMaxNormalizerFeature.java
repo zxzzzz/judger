@@ -46,7 +46,7 @@ public class CNMinMaxNormalizerFeature implements CNFeatures {
     }
 
     /**
-     * 得到basename特征的分数
+     * 得到该特征项的原始值
      * @param instance
      * @return
      */
@@ -59,6 +59,11 @@ public class CNMinMaxNormalizerFeature implements CNFeatures {
         return value.doubleValue();
     }
 
+    /**
+     * 计算该特征项的分数---正规化
+     * @param instance
+     * @return
+     */
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
         HashMap<String, Double> result = new HashMap<>();
@@ -69,7 +74,11 @@ public class CNMinMaxNormalizerFeature implements CNFeatures {
         double tempMax = max.get(instance.set)[0];
         // not equal
         assert (tempMax != tempMin);
-        double score = (value - tempMin) / (tempMax - tempMin);
+        /////todo 正规化得分公式
+        double value1=value-tempMin;
+        double value2=tempMax-tempMin;
+        double score = value1/value2;
+        System.out.println("正规化分数："+name+"得分"+score);
         result.put(name, score);
         return result;
     }

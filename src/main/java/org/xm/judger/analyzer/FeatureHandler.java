@@ -40,35 +40,50 @@ public class FeatureHandler {
 
     public static ArrayList<CNEssayInstance> getFeatures(ArrayList<CNEssayInstance> instances) {
         ArrayList<CNFeatures> CNFeaturesArrayList = new ArrayList<>();
+        //句长特征
         CNFeaturesArrayList.add(new CNSentenceLengthFeature());
+        //词长特征
         CNFeatures wordLengthFeature = new CNWordLengthFeature();
         CNFeaturesArrayList.add(wordLengthFeature);
+        //文本相似度特征
         CNFeatures idfFeature = new CNIDFFeature(instances);
         CNFeaturesArrayList.add(idfFeature);
+        //句子连贯性特征
         CNFeatures coherenceFeature = new CNSentenceCoherenceFeature();
         CNFeaturesArrayList.add(coherenceFeature);
-        // normalization
+        // 正规化
         CNFeaturesArrayList.add(new CNPercentMatchesFeature("，"));
         CNFeaturesArrayList.add(new CNPercentMatchesFeature("！"));
         CNFeaturesArrayList.add(new CNPercentMatchesFeature("？"));
+        CNFeaturesArrayList.add(new CNPercentMatchesFeature("的"));
         CNFeatures theFeature = new CNPercentMatchesFeature("这");
         CNFeaturesArrayList.add(theFeature);
         CNFeaturesArrayList.add(new CNPercentMatchesFeature("是"));
         // need dictionary
+        //单词类型特征
         CNFeatures wordFeature = null;
         try {
             wordFeature = new CNWordFeature();
+            //停用词特征
             CNFeaturesArrayList.add(new CNStopWordRatioFeature());
         } catch (IOException e) {
-            System.err.println("Unable to load words: " + e);
+            System.err.println("停用词加载失败  " + e);
         }
         CNFeaturesArrayList.add(wordFeature);
-        // primary features
+        // 评分
+        System.out.println("开始评分.......");
+
+        ////template
+
         for (CNEssayInstance instance : instances) {
-            for (CNFeatures CNFeatures : CNFeaturesArrayList)
+            for (CNFeatures CNFeatures : CNFeaturesArrayList) {
                 instance.setFeature(CNFeatures.getFeatureScores(instance));
+            }
         }
+        //正规化各特征项分数
         ArrayList<CNFeatures> normlizationFeatures = new ArrayList<>();
+
+        //min-max   未登录词占比/明显错误词占比/平均词长/文本相似度
         normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "OOVs"));
         normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "obvious_typos"));
         normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "AverageWordLength"));

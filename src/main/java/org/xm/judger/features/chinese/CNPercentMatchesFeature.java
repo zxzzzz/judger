@@ -31,11 +31,13 @@ public class CNPercentMatchesFeature implements CNFeatures {
         HashMap<String, Double> result = new HashMap<>();
         int numWords = 0;
         int matches = 0;
+        //todo 优化点：分词可以在评分之前统一进行
         ArrayList<ArrayList<ArrayList<String>>> paragraphs = instance.getParagraphs();
         for (ArrayList<ArrayList<String>> paragraph : paragraphs) {
             for (ArrayList<String> sentence : paragraph) {
                 for (String token : sentence) {
                     if (pattern.matcher(token).matches()) {
+                        //匹配输入的词
                         matches++;
                     }
                     numWords++;

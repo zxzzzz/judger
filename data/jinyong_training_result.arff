@@ -26,6 +26,7 @@
 特征： OneLengthWordCount
 特征： OneLengthWordRatio
 特征： PercentMatches_是
+特征： PercentMatches_的
 特征： PercentMatches_这
 特征： PercentMatches_这_abs_zscore_gaussiannorm_task
 特征： PercentMatches_这_normal_prob_gaussiannorm_task
@@ -73,6 +74,7 @@ OOVs_MinMaxNorm_Task:0.0
 OneLengthWordCount:587496.0
 OneLengthWordRatio:0.6801690303907381
 PercentMatches_\Q是\E:0.011601736613603473
+PercentMatches_\Q的\E:0.019866859623733718
 PercentMatches_\Q这\E:0.00734356005788712
 PercentMatches_\Q这\E_abs_zscore_gaussiannorm_task:0.7071067811865452
 PercentMatches_\Q这\E_normal_prob_gaussiannorm_task:1618.143927930899
@@ -119,6 +121,7 @@ OOVs_MinMaxNorm_Task:1.0
 OneLengthWordCount:482963.0
 OneLengthWordRatio:0.695059804188236
 PercentMatches_\Q是\E:0.010587881430695214
+PercentMatches_\Q的\E:0.01917965146484642
 PercentMatches_\Q这\E:0.0070720197567536065
 PercentMatches_\Q这\E_abs_zscore_gaussiannorm_task:0.7071067811865498
 PercentMatches_\Q这\E_normal_prob_gaussiannorm_task:1618.1439279308938

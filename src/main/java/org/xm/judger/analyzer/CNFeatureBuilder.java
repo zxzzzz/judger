@@ -120,6 +120,7 @@ public class CNFeatureBuilder {
             printWriter.println("特征： " + arffEscapeName(i) );
         printWriter.println("特征值：");
         printWriter.println("@data");
+        //输出分数
         for (CNEssayInstance instance : instances) {
             for (String feature : features) {
                 printWriter.print(feature+":");

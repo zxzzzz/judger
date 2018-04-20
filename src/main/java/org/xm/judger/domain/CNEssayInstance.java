@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
  */
 public class CNEssayInstance extends EssayInstance {
 
+    ////匹配模式 \s{2,}:至少匹配2+个空白字符
     private static final Pattern paragraphPattern = Pattern.compile("\\s{2,}");
 
     /**
