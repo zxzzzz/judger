@@ -85,6 +85,11 @@ public class CNEssayInstanceParser {
         return essayInstances;
     }
 
+    /**
+     * 训练集段落解析
+     * @param line
+     * @return
+     */
     private CNEssayInstance parseFields(String line) {
         String[] fields = line.split("\t");
         CNEssayInstance essay = new CNEssayInstance();

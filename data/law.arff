@@ -1,0 +1,151 @@
+自动生成评分:
+目录：data/law.arff
+特征： Adverb_TTR
+特征： AverageIDF
+特征： AverageSentenceLength
+特征： AverageWordLength
+特征： FourLengthWordCount
+特征： FourLengthWordRatio
+特征： MoreThanEightWordSentenceCount
+特征： MoreThanEightWordSentenceRatio
+特征： MoreThanNineWordSentenceCount
+特征： MoreThanNineWordSentenceRatio
+特征： MoreThanSevenWordSentenceCount
+特征： MoreThanSevenWordSentenceRatio
+特征： Num_Chars
+特征： Num_PrePosition
+特征： Num_Pronoun
+特征： Num_Sentences
+特征： Num_Words
+特征： OOVs
+特征： OneLengthWordCount
+特征： OneLengthWordRatio
+特征： PercentMatches_是
+特征： PercentMatches_的
+特征： PercentMatches_这
+特征： PercentMatches_！
+特征： PercentMatches_，
+特征： PercentMatches_？
+特征： TTR
+特征： ThreeLengthWordCount
+特征： ThreeLengthWordRatio
+特征： TwoLengthWordCount
+特征： TwoLengthWordRatio
+特征： Verb_TTR
+特征： WordsNum
+特征： obvious_typos
+特征： overlap_coherence
+特征： stopword_ratio
+特征值：
+@data
+Adverb_TTR:3.19629740908132E-5
+AverageIDF:0.7965
+AverageSentenceLength:5.9592
+AverageWordLength:1.6986
+FourLengthWordCount:9.0
+FourLengthWordRatio:0.0308
+MoreThanEightWordSentenceCount:11.0
+MoreThanEightWordSentenceRatio:0.2245
+MoreThanNineWordSentenceCount:8.0
+MoreThanNineWordSentenceRatio:0.1633
+MoreThanSevenWordSentenceCount:11.0
+MoreThanSevenWordSentenceRatio:0.2245
+Num_Chars:496.0
+Num_PrePosition:12.0
+Num_Pronoun:3.0
+Num_Sentences:49.0
+Num_Words:292.0
+OOVs:0.1747
+OneLengthWordCount:131.0
+OneLengthWordRatio:0.4486
+PercentMatches_\Q是\E:0.0
+PercentMatches_\Q的\E:0.0274
+PercentMatches_\Q这\E:0.0
+PercentMatches_\Q！\E:0.0
+PercentMatches_\Q，\E:0.0685
+PercentMatches_\Q？\E:0.0
+TTR:0.0015406153511771964
+ThreeLengthWordCount:19.0
+ThreeLengthWordRatio:0.0651
+TwoLengthWordCount:131.0
+TwoLengthWordRatio:0.4486
+Verb_TTR:2.684889823628309E-4
+WordsNum:292.0
+obvious_typos:0.1747
+overlap_coherence:0.05136986301369863
+stopword_ratio:0.2397
+-1.0
+Adverb_TTR:6.3925948181626405E-6
+AverageIDF:0.7063
+AverageSentenceLength:6.6
+AverageWordLength:1.5909
+FourLengthWordCount:1.0
+FourLengthWordRatio:0.0076
+MoreThanEightWordSentenceCount:6.0
+MoreThanEightWordSentenceRatio:0.3
+MoreThanNineWordSentenceCount:5.0
+MoreThanNineWordSentenceRatio:0.25
+MoreThanSevenWordSentenceCount:6.0
+MoreThanSevenWordSentenceRatio:0.3
+Num_Chars:210.0
+Num_PrePosition:8.0
+Num_Pronoun:0.0
+Num_Sentences:20.0
+Num_Words:132.0
+OOVs:0.1439
+OneLengthWordCount:64.0
+OneLengthWordRatio:0.4848
+PercentMatches_\Q是\E:0.0
+PercentMatches_\Q的\E:0.0379
+PercentMatches_\Q这\E:0.0076
+PercentMatches_\Q！\E:0.0
+PercentMatches_\Q，\E:0.0379
+PercentMatches_\Q？\E:0.0
+TTR:7.223632144523783E-4
+ThreeLengthWordCount:8.0
+ThreeLengthWordRatio:0.0606
+TwoLengthWordCount:59.0
+TwoLengthWordRatio:0.447
+Verb_TTR:1.1506670672692752E-4
+WordsNum:132.0
+obvious_typos:0.1439
+overlap_coherence:0.030303030303030304
+stopword_ratio:0.3106
+-1.0
+Adverb_TTR:1.9177784454487922E-5
+AverageIDF:0.7175
+AverageSentenceLength:6.75
+AverageWordLength:1.4519
+FourLengthWordCount:1.0
+FourLengthWordRatio:0.0074
+MoreThanEightWordSentenceCount:7.0
+MoreThanEightWordSentenceRatio:0.35
+MoreThanNineWordSentenceCount:4.0
+MoreThanNineWordSentenceRatio:0.2
+MoreThanSevenWordSentenceCount:9.0
+MoreThanSevenWordSentenceRatio:0.45
+Num_Chars:196.0
+Num_PrePosition:7.0
+Num_Pronoun:0.0
+Num_Sentences:20.0
+Num_Words:135.0
+OOVs:0.1704
+OneLengthWordCount:83.0
+OneLengthWordRatio:0.6148
+PercentMatches_\Q是\E:0.0
+PercentMatches_\Q的\E:0.0444
+PercentMatches_\Q这\E:0.0
+PercentMatches_\Q！\E:0.0
+PercentMatches_\Q，\E:0.0519
+PercentMatches_\Q？\E:0.0
+TTR:7.159706196342157E-4
+ThreeLengthWordCount:4.0
+ThreeLengthWordRatio:0.0296
+TwoLengthWordCount:46.0
+TwoLengthWordRatio:0.3407
+Verb_TTR:1.278518963632528E-4
+WordsNum:135.0
+obvious_typos:0.1704
+overlap_coherence:0.28888888888888886
+stopword_ratio:0.3185
+-1.0

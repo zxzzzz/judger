@@ -41,7 +41,8 @@ public class FeatureHandler {
     public static ArrayList<CNEssayInstance> getFeatures(ArrayList<CNEssayInstance> instances) {
         ArrayList<CNFeatures> CNFeaturesArrayList = new ArrayList<>();
         //句长特征
-        CNFeaturesArrayList.add(new CNSentenceLengthFeature());
+        CNSentenceLengthFeature sentenceLengthFeature=new CNSentenceLengthFeature();
+        CNFeaturesArrayList.add(sentenceLengthFeature);
         //词长特征
         CNFeatures wordLengthFeature = new CNWordLengthFeature();
         CNFeaturesArrayList.add(wordLengthFeature);
@@ -52,20 +53,28 @@ public class FeatureHandler {
         CNFeatures coherenceFeature = new CNSentenceCoherenceFeature();
         CNFeaturesArrayList.add(coherenceFeature);
         // 正规化
-        CNFeaturesArrayList.add(new CNPercentMatchesFeature("，"));
-        CNFeaturesArrayList.add(new CNPercentMatchesFeature("！"));
-        CNFeaturesArrayList.add(new CNPercentMatchesFeature("？"));
-        CNFeaturesArrayList.add(new CNPercentMatchesFeature("的"));
+        CNPercentMatchesFeature matches1=new CNPercentMatchesFeature("，");
+        CNFeaturesArrayList.add(matches1);
+        CNPercentMatchesFeature matches2 =new CNPercentMatchesFeature("！");
+        CNFeaturesArrayList.add(matches2);
+        CNPercentMatchesFeature matches3=new CNPercentMatchesFeature("？");
+        CNFeaturesArrayList.add(matches3);
+        CNPercentMatchesFeature matches4= new CNPercentMatchesFeature("的");
+        CNFeaturesArrayList.add(matches4);
         CNFeatures theFeature = new CNPercentMatchesFeature("这");
         CNFeaturesArrayList.add(theFeature);
-        CNFeaturesArrayList.add(new CNPercentMatchesFeature("是"));
+        CNPercentMatchesFeature yesFeature=new CNPercentMatchesFeature("是");
+        CNFeaturesArrayList.add(yesFeature);
         // need dictionary
         //单词类型特征
         CNFeatures wordFeature = null;
+        CNStopWordRatioFeature stopWordRatioFeature =null;
         try {
             wordFeature = new CNWordFeature();
             //停用词特征
-            CNFeaturesArrayList.add(new CNStopWordRatioFeature());
+
+            stopWordRatioFeature=new CNStopWordRatioFeature();
+            CNFeaturesArrayList.add(stopWordRatioFeature);
         } catch (IOException e) {
             System.err.println("停用词加载失败  " + e);
         }
@@ -80,15 +89,41 @@ public class FeatureHandler {
                 instance.setFeature(CNFeatures.getFeatureScores(instance));
             }
         }
+        System.out.println("评分结束...");
         //正规化各特征项分数
         ArrayList<CNFeatures> normlizationFeatures = new ArrayList<>();
 
         //min-max   未登录词占比/明显错误词占比/平均词长/文本相似度
         normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "OOVs"));
         normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "obvious_typos"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "TTR"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Verb_TTR"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Adverb_TTR"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_PrePosition"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_Pronoun"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_Chars"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_Words"));
+
         normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "AverageWordLength"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "OneLengthWordRatio"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "ThreeLengthWordRatio"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "TwoLengthWordRatio"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "FourLengthWordRatio"));
+
         normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, idfFeature, "AverageIDF"));
 
+
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,stopWordRatioFeature , "stopword_ratio"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "Num_Sentences"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "AverageSentenceLength"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "MoreThanSevenWordSentenceRatio"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "MoreThanEightWordSentenceRatio"));
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "MoreThanNineWordSentenceRatio"));
+
+        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,coherenceFeature , "overlap_coherence"));
+
+        //高斯正规化
+        //
         normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, idfFeature, "AverageIDF", CNGaussianNormailizerFeature.Type.ABS_ZSCORE));
         normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, idfFeature, "AverageIDF", CNGaussianNormailizerFeature.Type.ZSCORE));
         normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, coherenceFeature, "overlap_coherence", CNGaussianNormailizerFeature.Type.ZSCORE));
@@ -96,11 +131,11 @@ public class FeatureHandler {
         normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, theFeature, "PercentMatches_\\Q这\\E", CNGaussianNormailizerFeature.Type.ZSCORE));
         normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, theFeature, "PercentMatches_\\Q这\\E", CNGaussianNormailizerFeature.Type.NORMAL_PROB));
         normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, theFeature, "PercentMatches_\\Q这\\E", CNGaussianNormailizerFeature.Type.ABS_ZSCORE));
-        // compute normalization feature
-        for (CNEssayInstance instance : instances) {
-            for (CNFeatures feature : normlizationFeatures)
-                instance.setFeature(feature.getFeatureScores(instance));
-        }
+//        // compute normalization feature
+//        for (CNEssayInstance instance : instances) {
+//            for (CNFeatures feature : normlizationFeatures)
+//                instance.setFeature(feature.getFeatureScores(instance));
+//        }
 
         return instances;
     }

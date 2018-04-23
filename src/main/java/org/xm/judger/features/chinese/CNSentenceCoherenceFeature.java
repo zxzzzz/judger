@@ -39,8 +39,8 @@ public class CNSentenceCoherenceFeature implements CNFeatures {
         }
         result.put("overlap_coherence", new Double(overlap / (double) numWords));
         if (Config.DEBUG)
-            System.out.println("关键字重复率  Overlap coherence for ID(" + instance.id + ") @ score("
-                    + instance.domain1_score + "): " + result.get("overlap_coherence"));
+            System.out.println("单词重复率  Overlap coherence for ID(" + instance.id + ") @ score("
+                    + instance.domain1_score + "): " + result.get("overlap_coherence")*100+"%");
 
         return result;
     }

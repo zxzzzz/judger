@@ -4,13 +4,16 @@ package org.xm.judger.features.chinese;
 import org.xm.judger.domain.CNEssayInstance;
 import org.xm.judger.domain.Config;
 import org.xm.judger.domain.EssayInstance;
+import org.xm.judger.util.DoubleUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
+ *
  * 文本相似度计算 TF-IDF：关键词--词向量--计算相似度
+ *  单词权重
  * @author xuming
  */
 public class CNIDFFeature implements CNFeatures {
@@ -43,7 +46,8 @@ public class CNIDFFeature implements CNFeatures {
             }
         }
         // 2.invert it
-        for (String word : idf.keySet()) idf.get(word)[0] = Math.log(instances.size() / (double) idf.get(word)[0]);
+        for (String word : idf.keySet())
+            idf.get(word)[0] = Math.log(instances.size() / (double) idf.get(word)[0]);
     }
 
     @Override
@@ -60,9 +64,9 @@ public class CNIDFFeature implements CNFeatures {
             }
         }
         HashMap<String, Double> values = new HashMap<>();
-        values.put("AverageIDF", new Double(sumIdf / (double) numWords));
+        values.put("AverageIDF", DoubleUtil.stayTwoDec(new Double(sumIdf / (double) numWords)));
         if (Config.DEBUG)
-            System.out.println("平均相似度  AverageIDF for ID(" + instance.id + "): " + values.get("AverageIDF"));
+            System.out.println("单词权重  AverageIDF for ID(" + instance.id + "): " + values.get("AverageIDF")*100+"%");
         return values;
     }
 }

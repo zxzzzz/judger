@@ -2,6 +2,7 @@ package org.xm.judger.features.chinese;
 
 import org.xm.judger.domain.CNEssayInstance;
 import org.xm.judger.domain.Config;
+import org.xm.judger.util.DoubleUtil;
 import org.xm.xmnlp.dic.DicReader;
 
 import java.io.BufferedReader;
@@ -51,8 +52,8 @@ public class CNStopWordRatioFeature implements CNFeatures {
                 }
             }
         }
-        result.put("stopword_ratio", numStopwords / (double) numWords);
-        System.out.println("停用词比例 stopword ratio :"+numStopwords/(double)numWords);
+        result.put("stopword_ratio", DoubleUtil.stayTwoDec(numStopwords / (double) numWords));
+        System.out.println("停用词比例 stopword ratio :"+result.get("stopword_ratio")*100+"%");
         return result;
     }
 }

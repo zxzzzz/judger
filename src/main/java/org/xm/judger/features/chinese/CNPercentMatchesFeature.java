@@ -3,6 +3,7 @@ package org.xm.judger.features.chinese;
 
 import org.xm.judger.domain.CNEssayInstance;
 import org.xm.judger.domain.Config;
+import org.xm.judger.util.DoubleUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,10 +45,10 @@ public class CNPercentMatchesFeature implements CNFeatures {
                 }
             }
         }
-        result.put("PercentMatches_" + pattern, new Double(matches / (double) numWords));
+        result.put("PercentMatches_" + pattern, DoubleUtil.stayTwoDec(new Double(matches / (double) numWords)));
         if (Config.DEBUG)
-            System.out.println("正则匹配率  Percent matches(匹配模式：" + pattern + ") for ID(" + instance.id + "): 匹配率："
-                    + (matches / (double) numWords));
+            System.out.println("单词匹配率  Percent matches(匹配模式：" + pattern + ") for ID(" + instance.id + "): 匹配率："
+                    +  DoubleUtil.stayTwoDec(new Double(matches / (double) numWords))*100+"%");
         return result;
     }
 }

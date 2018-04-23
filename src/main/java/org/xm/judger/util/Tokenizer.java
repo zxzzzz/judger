@@ -35,6 +35,13 @@ public class Tokenizer {
             this.pos = pos;
         }
 
+        public Word(String name, String pos, Float weight, int frequency) {
+            this.name = name;
+            this.pos = pos;
+            this.weight = weight;
+            this.frequency = frequency;
+        }
+
         @Override
         public int hashCode() {
             return Objects.hashCode(this.name);

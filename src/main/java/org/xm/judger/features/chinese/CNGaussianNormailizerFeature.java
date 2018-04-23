@@ -71,7 +71,7 @@ public class CNGaussianNormailizerFeature implements CNFeatures {
                 stddev.put(instance.set, new double[]{dev});
             else stddev.get(instance.set)[0] += dev;
         }
-        // normalize the stddev
+        // 正规化标准偏差
         for (Integer i : stddev.keySet()) stddev.get(i)[0] = Math.sqrt(stddev.get(i)[0] / (docs.get(i)[0] - 1));
         // debug
         if (Config.DEBUG) {
