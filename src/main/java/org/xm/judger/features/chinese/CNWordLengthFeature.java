@@ -18,6 +18,9 @@ import java.util.zip.DeflaterOutputStream;
  */
 public class CNWordLengthFeature implements CNFeatures {
 
+    //todo 词长权重/特征项范围待分析
+    //词长特征权重
+    public static final double WORDLENGTH_WEIGHT=0;
     // 特征的范围
     private static final double AVERAGE_MIN=0;
     private static final double AVERAGE_MAX=0;

@@ -17,10 +17,16 @@ import java.util.HashSet;
  * @author xuming
  */
 public class CNStopWordRatioFeature implements CNFeatures {
+
+    //todo 停用词权重 /范围待分析
+    public static final double STOPWORD_WEIGHT=0;
+    //停用词特征项的范围
+    private static final double STOPWORD_MIN=0;
+    private static final double STOPWORD_MAX=0;
+
+
     HashSet<String> stopwords;
     private static final String PATH = Config.STOP_WORDS_PATH;
-    private static final Double STOP_MAX_GRADE= 0.0;
-    private static final Double STOP_MIN_GRADE=0.0;
     public CNStopWordRatioFeature() throws IOException {
         this(PATH);
     }
@@ -58,14 +64,20 @@ public class CNStopWordRatioFeature implements CNFeatures {
         return result;
     }
 
+    /**
+     * 停用词特征得分
+     * stopScore
+     * @param instance
+     * @return
+     */
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
         //todo 停用词得分
         HashMap<String,Double> scores=new HashMap<>();
         HashMap<String, Double> results=getFeatureScores(instance);
         double value=results.get("stopword_ratio");
-        double score=((value-STOP_MIN_GRADE)/(STOP_MAX_GRADE-STOP_MIN_GRADE))*100;
-        scores.put("stopword_ratio",score);
+        double score=((value-STOPWORD_MIN)/(STOPWORD_MAX-STOPWORD_MIN))*100;
+        scores.put("stopScore",score);
         return scores;
     }
 }
