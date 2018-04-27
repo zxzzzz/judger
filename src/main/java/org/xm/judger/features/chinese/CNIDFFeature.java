@@ -45,7 +45,7 @@ public class CNIDFFeature implements CNFeatures {
                 }
             }
             // merge
-            //计算词频
+            //计算词频 --每个单词的词频
             for (String word : words) {
                 if (idf.containsKey(word))
                     idf.get(word)[0]++;
