@@ -25,6 +25,39 @@ public class CNWordFeature implements CNFeatures {
     // add punctuation symbols
     String[] punctuation = new String[]{",", "，", ".", "。", "?", "？", "-", "!", "！", "'", "\"", "(", ")", "（", "）",
             "$", ":", "：", ";", "；", "“", "”", "《", "》"};
+    //todo word feature 范围/特征项权重/综合权重待分析
+    //WordFeature的权重
+    public static final double WORDFEATURE_WEIGHT=0;
+    //特征项范围
+    private static final double UNREGISTER_MIN=0;
+    private static final double UNREGISTER_MAX=0;
+    private static final double ERRORWORD_MIN=0;
+    private static final double ERRORWORD_MAX=0;
+    private static final double TTR_MIN=0;
+    private static final double TTR_MAX=0;
+    private static final double VERBTTR_MIN=0;
+    private static final double VERBTTR_MAX=0;
+    private static final double ADTTR_MIN=0;
+    private static final double ADTTR_MAX=0;
+    private static final double NUMPRE_MIN=0;
+    private static final double NUMPRE_MAX=0;
+    private static final double NUMPRO_MIN=0;
+    private static final double NUMPRO_MAX=0;
+    private static final double NUMCHARS_MIN=0;
+    private static final double NUMCHARS_MAX=0;
+    private static final double NUMWORD_MIN=0;
+    private static final double NUMWORD_MAX=0;
+
+    //特征项权重
+    private static final double UNREGISTER_WEIGHT=0;
+    private static final double ERRORWORD_WEIGHT=0;
+    private static final double TTR_WEIGHT=0;
+    private static final double VERBTTR_WEIGHT=0;
+    private static final double ADTTR_WEIGHT=0;
+    private static final double NUMPRE_WEIGHT=0;
+    private static final double NUMPRO_WEIGHT=0;
+    private static final double NUMCHARS_WEIGHT=0;
+    private static final double NUMWORD_WEIGHT=0;
 
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
@@ -82,9 +115,44 @@ public class CNWordFeature implements CNFeatures {
         return result;
     }
 
+    /**
+     * 评分准则
+     * wordScore
+     * @param instance
+     * @return
+     */
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
-        return null;
+        HashMap<String,Double> scores=new HashMap<>();
+        HashMap<String,Double> results=getFeatureScores(instance);
+        //原始特征
+        double unRegister=results.get("OOVs");
+        double errorWord=results.get("obvious_typos");
+        double ttr=results.get("TTR");
+        double verbTtr=results.get("Verb_TTR");
+        double adTtr=results.get("Adverb_TTR");
+        double numPre=results.get("Num_PrePosition");
+        double numPro=results.get("Num_Pronoun");
+        double numChars=results.get("Num_Chars");
+        double numWord=results.get("Num_Words");
+
+        //特征分数
+        double unRegisterScore=((unRegister-UNREGISTER_MIN)/(UNREGISTER_MAX-UNREGISTER_MIN))*100;
+        double errorWordScore=((errorWord-ERRORWORD_MIN)/(ERRORWORD_MAX-ERRORWORD_MIN))*100;
+        double ttrScore=((ttr-TTR_MIN)/(TTR_MAX-TTR_MIN))*100;
+        double verbTtrScore=((verbTtr-TTR_MIN)/(TTR_MAX-TTR_MIN))*100;
+        double adTtrScore=((adTtr-ADTTR_MIN)/(ADTTR_MAX-ADTTR_MIN))*100;
+        double numPreScore=((numPre-NUMPRE_MIN)/(NUMPRE_MAX-NUMPRE_MIN))*100;
+        double numProScore=((numPro-NUMPRO_MIN)/(NUMPRO_MAX-NUMPRO_MIN))*100;
+        double numCharsScore=((numChars-NUMCHARS_MIN)/(NUMCHARS_MAX-NUMCHARS_MIN))*100;
+        double numWordScore=((numWord-NUMWORD_MIN)/(NUMWORD_MAX-NUMWORD_MIN))*100;
+
+        //综合分数
+        double wordScore=unRegisterScore*UNREGISTER_WEIGHT+errorWordScore*ERRORWORD_WEIGHT+ttrScore*TTR_WEIGHT+
+                verbTtrScore*TTR_WEIGHT+verbTtrScore*VERBTTR_WEIGHT+adTtrScore*ADTTR_WEIGHT+numPreScore*NUMPRE_WEIGHT+
+                numProScore*NUMPRO_WEIGHT+numCharsScore*NUMCHARS_WEIGHT+numWordScore*NUMWORD_WEIGHT;
+        scores.put("wordScore",wordScore);
+        return scores;
     }
 }
 

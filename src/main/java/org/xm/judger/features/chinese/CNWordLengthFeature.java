@@ -31,6 +31,13 @@ public class CNWordLengthFeature implements CNFeatures {
     private static final double FOUR_MAX=0;
     private static final double NUM_MIN=0;
     private static final double NUM_MAX=0;
+    //各特征项的权重
+    private static final double AVERAGE_WEIGHT=0;
+    private static final double ONE_WEIGHT=0;
+    private static final double TWO_WEIGHT=0;
+    private static final double THREE_WEIGHT=0;
+    private static final double FOUR_WEIGHT=0;
+    private static final double NUM_WEIGHT=0;
 
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
@@ -91,7 +98,8 @@ public class CNWordLengthFeature implements CNFeatures {
     /**
      *
      * 评分维度：平均词长/词长为1的单词数/词长为2的单词数/词长为3的单词数
-     * 评分细则：
+     * 评分细则：各特征的得分公式：((value-min)/(max-min))*100;
+     * 综合得分公式：sum(featureScore*权重)
      * @param instance
      * @return
      */
@@ -105,13 +113,15 @@ public class CNWordLengthFeature implements CNFeatures {
         double twoNum=result.get("TwoLengthWordCount");
         double threeNum=result.get("ThreeLengthWordCount");
         double fourNum=result.get("FourLengthWordCount");
+        double num=result.get("WordsNum");
         double averageScore =((averageLength-AVERAGE_MIN)/(AVERAGE_MAX-AVERAGE_MIN))*100;
         double oneScore=((oneNum-ONE_MIN)/(ONE_MAX-ONE_MIN))*100;
         double twoScore=((twoNum-TWO_MIN)/(TWO_MAX-TWO_MIN))*100;
         double threeScore=((threeNum-THREE_MIN)/(THREE_MAX-THREE_MIN))*100;
         double fourScore=((fourNum-FOUR_MIN)/(FOUR_MAX-FOUR_MIN))*100;
-
-
-        return null;
+        double numScore=((num-NUM_MIN)/(NUM_MAX-NUM_MIN))*100;
+        double lengthScore=averageScore*AVERAGE_WEIGHT+oneNum*ONE_WEIGHT+twoNum*TWO_WEIGHT+threeScore*THREE_WEIGHT+fourScore*FOUR_WEIGHT+numScore*NUM_WEIGHT;
+        scores.put("wordLengthScore",lengthScore);
+        return scores;
     }
 }
