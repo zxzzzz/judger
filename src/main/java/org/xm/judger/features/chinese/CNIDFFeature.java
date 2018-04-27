@@ -69,4 +69,12 @@ public class CNIDFFeature implements CNFeatures {
             System.out.println("单词权重  AverageIDF for ID(" + instance.id + "): " + values.get("AverageIDF")*100+"%");
         return values;
     }
+
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance cnEssayInstance) {
+        HashMap<String,Double> results=getFeatureScores(cnEssayInstance);
+        //todo   TF-IDF计算
+
+        return null;
+    }
 }

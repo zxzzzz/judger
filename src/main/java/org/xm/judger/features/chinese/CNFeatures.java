@@ -16,4 +16,9 @@ public interface CNFeatures {
      */
     HashMap<String, Double> getFeatureScores(CNEssayInstance instance);
 
+    /**
+     * 特征项得分
+     */
+    HashMap<String,Double> normalizeScore(CNEssayInstance instance);
+
 }

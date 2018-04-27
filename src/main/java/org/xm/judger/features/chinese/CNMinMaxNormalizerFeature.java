@@ -82,4 +82,9 @@ public class CNMinMaxNormalizerFeature implements CNFeatures {
         result.put(name, score);
         return result;
     }
+
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+        return null;
+    }
 }

@@ -25,10 +25,7 @@ public class ThemeTest {
                 System.out.print(s+" ");
             }
             System.out.println();
-            for (String s:summary){
-                System.out.println(s);
-            }
-            System.out.println();
+
         }
     }
     @Test
@@ -39,7 +36,10 @@ public class ThemeTest {
         ArrayList<CNEssayInstance> instances = parser.load(trainSetPath);
         ThemeAnalyzer themeAnalyzer=new ThemeAnalyzer();
         for (CNEssayInstance instance : instances) {
-            System.out.println(themeAnalyzer.getSummary(instance,3));
+            List<String> summary=themeAnalyzer.getSummary(instance,3);
+            summary.forEach(p->System.out.println(p));
+
+
         }
     }
 

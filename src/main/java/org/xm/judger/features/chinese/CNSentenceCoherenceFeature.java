@@ -44,4 +44,9 @@ public class CNSentenceCoherenceFeature implements CNFeatures {
 
         return result;
     }
+
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+        return null;
+    }
 }

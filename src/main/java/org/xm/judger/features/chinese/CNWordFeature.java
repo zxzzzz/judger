@@ -81,5 +81,10 @@ public class CNWordFeature implements CNFeatures {
         }
         return result;
     }
+
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+        return null;
+    }
 }
 

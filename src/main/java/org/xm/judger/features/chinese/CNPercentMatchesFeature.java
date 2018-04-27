@@ -51,4 +51,11 @@ public class CNPercentMatchesFeature implements CNFeatures {
                     +  DoubleUtil.stayTwoDec(new Double(matches / (double) numWords))*100+"%");
         return result;
     }
+
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+        //todo 词语词频计算
+
+        return null;
+    }
 }

@@ -72,4 +72,18 @@ public class CNWordLengthFeature implements CNFeatures {
             System.out.println("词长为4的单词数占比  FourLengthWordRatio for ID(" + instance.id + "): " + values.get("FourLengthWordRatio")*100+"%");
         return values;
     }
+
+    /**
+     *
+     * 评分维度：平均词长/词长为1的单词数/词长为2的单词数/词长为3的单词数
+     * 评分细则：
+     * @param instance
+     * @return
+     */
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+        HashMap<String,Double> result =getFeatureScores(instance);
+
+        return null;
+    }
 }
