@@ -15,6 +15,13 @@ import java.util.HashSet;
  */
 public class CNSentenceCoherenceFeature implements CNFeatures {
 
+    // todo 句子连贯性特征权重/范围
+    public static final  double OVERLAP_COHERENCE_WEIGHT =0;
+    //特征项范围
+    private static final double OVERLAP_COHERENCE_MIN=0;
+    private static final double OVERLAP_COHERENCE_MAX=0;
+
+
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
         HashMap<String, Double> result = new HashMap<>();
@@ -45,8 +52,19 @@ public class CNSentenceCoherenceFeature implements CNFeatures {
         return result;
     }
 
+    /**
+     * 句子连贯性评分
+     * overlapCoherenceScore
+     * @param instance
+     * @return
+     */
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
-        return null;
+        HashMap<String,Double> scores=new HashMap<>();
+        HashMap<String,Double> results=getFeatureScores(instance);
+        double overlapCoherence=results.get("overlap_coherence");
+        double overlapCoherenceScore=((overlapCoherence-OVERLAP_COHERENCE_MIN)/(OVERLAP_COHERENCE_MAX-OVERLAP_COHERENCE_MIN))*100;
+        scores.put("overlapCoherenceScore",overlapCoherenceScore);
+        return scores;
     }
 }

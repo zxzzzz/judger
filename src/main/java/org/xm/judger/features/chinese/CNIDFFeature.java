@@ -17,6 +17,12 @@ import java.util.HashSet;
  * @author xuming
  */
 public class CNIDFFeature implements CNFeatures {
+    //todo  TF_IDF特征权重/特征项范围的分析
+
+    public static final double IDF_WEIGHT=0;
+    private static final double IDF_MIN=0;
+    private static final double IDF_MAX=0;
+
     HashMap<String, double[]> idf;
 
     /**
@@ -39,6 +45,7 @@ public class CNIDFFeature implements CNFeatures {
                 }
             }
             // merge
+            //计算词频
             for (String word : words) {
                 if (idf.containsKey(word))
                     idf.get(word)[0]++;
@@ -46,6 +53,7 @@ public class CNIDFFeature implements CNFeatures {
             }
         }
         // 2.invert it
+        //计算IDF-反文档词频
         for (String word : idf.keySet())
             idf.get(word)[0] = Math.log(instances.size() / (double) idf.get(word)[0]);
     }
@@ -70,11 +78,19 @@ public class CNIDFFeature implements CNFeatures {
         return values;
     }
 
+    /**
+     * IDF得分
+     * idfScore
+     * @param cnEssayInstance
+     * @return
+     */
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance cnEssayInstance) {
+        HashMap<String,Double> scores=new HashMap<>();
         HashMap<String,Double> results=getFeatureScores(cnEssayInstance);
-        //todo   TF-IDF计算
-
-        return null;
+        double idf=results.get("AverageIDF");
+        double idfScore=((idf-IDF_MIN)/(IDF_MAX-IDF_MIN))*100;
+        scores.put("idfScore",idfScore);
+        return scores;
     }
 }
