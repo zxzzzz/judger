@@ -57,4 +57,9 @@ public class CNSentenceLengthFeature implements CNFeatures {
         }
         return values;
     }
+
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+        return null;
+    }
 }

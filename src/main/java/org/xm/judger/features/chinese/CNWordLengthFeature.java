@@ -8,6 +8,7 @@ import org.xm.judger.util.DoubleUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.zip.DeflaterOutputStream;
 
 /**
  * 词长特征
@@ -16,6 +17,20 @@ import java.util.HashMap;
  * @author xuming
  */
 public class CNWordLengthFeature implements CNFeatures {
+
+    // 特征的范围
+    private static final double AVERAGE_MIN=0;
+    private static final double AVERAGE_MAX=0;
+    private static final double ONE_MIN=0;
+    private static final double ONE_MAX=0;
+    private static final double TWO_MIN=0;
+    private static final double TWO_MAX=0;
+    private static final double THREE_MIN=0;
+    private static final double THREE_MAX=0;
+    private static final double FOUR_MIN=0;
+    private static final double FOUR_MAX=0;
+    private static final double NUM_MIN=0;
+    private static final double NUM_MAX=0;
 
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
@@ -83,6 +98,19 @@ public class CNWordLengthFeature implements CNFeatures {
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
         HashMap<String,Double> result =getFeatureScores(instance);
+        //todo 词长的评分标准
+        HashMap<String,Double> scores=new HashMap<>();
+        double averageLength=result.get("AverageWordLength");
+        double oneNum=result.get("OneLengthWordCount");
+        double twoNum=result.get("TwoLengthWordCount");
+        double threeNum=result.get("ThreeLengthWordCount");
+        double fourNum=result.get("FourLengthWordCount");
+        double averageScore =((averageLength-AVERAGE_MIN)/(AVERAGE_MAX-AVERAGE_MIN))*100;
+        double oneScore=((oneNum-ONE_MIN)/(ONE_MAX-ONE_MIN))*100;
+        double twoScore=((twoNum-TWO_MIN)/(TWO_MAX-TWO_MIN))*100;
+        double threeScore=((threeNum-THREE_MIN)/(THREE_MAX-THREE_MIN))*100;
+        double fourScore=((fourNum-FOUR_MIN)/(FOUR_MAX-FOUR_MIN))*100;
+
 
         return null;
     }

@@ -123,4 +123,9 @@ public class CNGaussianNormailizerFeature implements CNFeatures {
         System.out.println("高斯正规化  name:"+name +"分数:"+core);
         return values;
     }
+
+    @Override
+    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+        return null;
+    }
 }
