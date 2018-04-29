@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * 主题分析，包括关键字抽取/生成摘要/主题相似度计算
+ */
 public interface ThemeAnalyzer {
 
     /**
