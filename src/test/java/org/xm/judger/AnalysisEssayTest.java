@@ -1,16 +1,13 @@
 package org.xm.judger;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.junit.Test;
 import org.xm.judger.analyzer.FeatureHandler;
-import org.xm.judger.analyzer.ThemeAnalyzer;
 import org.xm.judger.domain.CNEssayInstance;
 import org.xm.judger.parser.CNEssayInstanceParser;
 import org.xm.xmnlp.Xmnlp;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author xuming

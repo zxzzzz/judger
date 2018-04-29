@@ -1,65 +1,43 @@
 package org.xm.judger.analyzer;
 
-import com.hankcs.hanlp.HanLP;
+import lombok.Data;
 import org.xm.judger.domain.CNEssayInstance;
-import org.xm.xmnlp.Xmnlp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 
-public class ThemeAnalyzer {
+public interface ThemeAnalyzer {
 
-    //得到文章的关键字
-    //得到文章的摘要
-    //主题相似度
-    //文本相似度
-    private static final int KEYWORDS_SIZE=10;
-    public HashMap<Integer,Double> similary=null;
+    /**
+     * 是否开启主题相似度检测
+     * 默认不开启
+     */
+     public static boolean useTheme=false;
+
     /**
      * 解析文本关键字
+     *
+     * @param essayInstance 中文实例
+     * @param size 关键词词数
      * @return
      */
-    public List<String > getKeyWords(CNEssayInstance essayInstance,int size){
-        String content=essayInstance.essay;
-        List<String> keywords= HanLP.extractKeyword(content,size);
-        return keywords;
-    }
+    public List<String> getKeyWords(CNEssayInstance essayInstance, int size);
 
     /**
      * 解析文本摘要
-     * @param essayInstance
+     *
+     * @param essayInstance  中文文章
+     * @param size 摘要句数
      * @return
      */
-    public List<String>  getSummary(CNEssayInstance essayInstance,int size){
-        List<String>summarys=HanLP.extractSummary(essayInstance.essay,size);
-        return summarys;
-    }
+    public List<String> getSummary(CNEssayInstance essayInstance, int size);
 
     /**
-     * 主题相似度  TF-IDF算法  todo  TF-IDF算法
+     * 主题相似度分析
+     * @param cnEssayInstances 主题与文章
+     * @return
      */
-    public void textSimilarity(ArrayList<CNEssayInstance> cnEssayInstances){
-        ArrayList<List<String>> keywords=null;
-        HashSet<String> allKeyword =null;
-        for (CNEssayInstance instance:cnEssayInstances){
-            List<String> key=new ArrayList<>();
-            key=getKeyWords(instance,KEYWORDS_SIZE);
-            keywords.add(key);
-            allKeyword.addAll(key);
-        }
-        //词向量数组
-        Integer [][]vertext=new Integer[cnEssayInstances.size()+1][allKeyword.size()+1];
-        for (int i=0;i<allKeyword.size();i++){
-            for (String s:keywords.get(i)){
-                ////
-            }
-        }
-
+    public double themeSimilarity(ArrayList<CNEssayInstance> cnEssayInstances);
 
     }
-
-
-}
