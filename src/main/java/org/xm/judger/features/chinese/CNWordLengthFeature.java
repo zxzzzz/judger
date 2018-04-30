@@ -103,20 +103,19 @@ public class CNWordLengthFeature implements CNFeatures {
      * 评分维度：平均词长/词长为1的单词数/词长为2的单词数/词长为3的单词数
      * 评分细则：各特征的得分公式：((value-min)/(max-min))*100;
      * 综合得分公式：sum(featureScore*权重)
-     * @param instance
+     * @param result 中文实例
      * @return
      */
     @Override
-    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
-        HashMap<String,Double> result =getFeatureScores(instance);
+    public HashMap<String, Double> normalizeScore(CNEssayInstance result) {
         //todo 词长的评分标准
         HashMap<String,Double> scores=new HashMap<>();
-        double averageLength=result.get("AverageWordLength");
-        double oneNum=result.get("OneLengthWordCount");
-        double twoNum=result.get("TwoLengthWordCount");
-        double threeNum=result.get("ThreeLengthWordCount");
-        double fourNum=result.get("FourLengthWordCount");
-        double num=result.get("WordsNum");
+        double averageLength=result.getFeature("AverageWordLength");
+        double oneNum=result.getFeature("OneLengthWordCount");
+        double twoNum=result.getFeature("TwoLengthWordCount");
+        double threeNum=result.getFeature("ThreeLengthWordCount");
+        double fourNum=result.getFeature("FourLengthWordCount");
+        double num=result.getFeature("WordsNum");
         double averageScore =((averageLength-AVERAGE_MIN)/(AVERAGE_MAX-AVERAGE_MIN))*100;
         double oneScore=((oneNum-ONE_MIN)/(ONE_MAX-ONE_MIN))*100;
         double twoScore=((twoNum-TWO_MIN)/(TWO_MAX-TWO_MIN))*100;
@@ -125,6 +124,7 @@ public class CNWordLengthFeature implements CNFeatures {
         double numScore=((num-NUM_MIN)/(NUM_MAX-NUM_MIN))*100;
         double lengthScore=averageScore*AVERAGE_WEIGHT+oneNum*ONE_WEIGHT+twoNum*TWO_WEIGHT+threeScore*THREE_WEIGHT+fourScore*FOUR_WEIGHT+numScore*NUM_WEIGHT;
         scores.put("wordLengthScore",lengthScore);
+        System.out.println("wordLengthScore:"+lengthScore);
         return scores;
     }
 }

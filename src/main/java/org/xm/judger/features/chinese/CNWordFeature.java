@@ -118,23 +118,22 @@ public class CNWordFeature implements CNFeatures {
     /**
      * 评分准则
      * wordScore
-     * @param instance
+     * @param results 中文实例
      * @return
      */
     @Override
-    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+    public HashMap<String, Double> normalizeScore(CNEssayInstance results) {
         HashMap<String,Double> scores=new HashMap<>();
-        HashMap<String,Double> results=getFeatureScores(instance);
         //原始特征
-        double unRegister=results.get("OOVs");
-        double errorWord=results.get("obvious_typos");
-        double ttr=results.get("TTR");
-        double verbTtr=results.get("Verb_TTR");
-        double adTtr=results.get("Adverb_TTR");
-        double numPre=results.get("Num_PrePosition");
-        double numPro=results.get("Num_Pronoun");
-        double numChars=results.get("Num_Chars");
-        double numWord=results.get("Num_Words");
+        double unRegister=results.getFeature("OOVs");
+        double errorWord=results.getFeature("obvious_typos");
+        double ttr=results.getFeature("TTR");
+        double verbTtr=results.getFeature("Verb_TTR");
+        double adTtr=results.getFeature("Adverb_TTR");
+        double numPre=results.getFeature("Num_PrePosition");
+        double numPro=results.getFeature("Num_Pronoun");
+        double numChars=results.getFeature("Num_Chars");
+        double numWord=results.getFeature("Num_Words");
 
         //特征分数
         double unRegisterScore=((unRegister-UNREGISTER_MIN)/(UNREGISTER_MAX-UNREGISTER_MIN))*100;
@@ -151,7 +150,9 @@ public class CNWordFeature implements CNFeatures {
         double wordScore=unRegisterScore*UNREGISTER_WEIGHT+errorWordScore*ERRORWORD_WEIGHT+ttrScore*TTR_WEIGHT+
                 verbTtrScore*TTR_WEIGHT+verbTtrScore*VERBTTR_WEIGHT+adTtrScore*ADTTR_WEIGHT+numPreScore*NUMPRE_WEIGHT+
                 numProScore*NUMPRO_WEIGHT+numCharsScore*NUMCHARS_WEIGHT+numWordScore*NUMWORD_WEIGHT;
+
         scores.put("wordScore",wordScore);
+        System.out.println("word-score："+wordScore);
         return scores;
     }
 }

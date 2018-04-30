@@ -65,6 +65,7 @@ public class CNSentenceCoherenceFeature implements CNFeatures {
         double overlapCoherence=results.get("overlap_coherence");
         double overlapCoherenceScore=((overlapCoherence-OVERLAP_COHERENCE_MIN)/(OVERLAP_COHERENCE_MAX-OVERLAP_COHERENCE_MIN))*100;
         scores.put("overlapCoherenceScore",overlapCoherenceScore);
+        System.out.println("overlapCoherenceScore:"+overlapCoherenceScore);
         return scores;
     }
 }

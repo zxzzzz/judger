@@ -74,10 +74,10 @@ public class CNStopWordRatioFeature implements CNFeatures {
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
         //todo 停用词得分
         HashMap<String,Double> scores=new HashMap<>();
-        HashMap<String, Double> results=getFeatureScores(instance);
-        double value=results.get("stopword_ratio");
+        double value=instance.getFeature("stopword_ratio");
         double score=((value-STOPWORD_MIN)/(STOPWORD_MAX-STOPWORD_MIN))*100;
         scores.put("stopScore",score);
+        System.out.println("stopScore:"+score);
         return scores;
     }
 }

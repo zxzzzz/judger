@@ -87,10 +87,10 @@ public class CNIDFFeature implements CNFeatures {
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance cnEssayInstance) {
         HashMap<String,Double> scores=new HashMap<>();
-        HashMap<String,Double> results=getFeatureScores(cnEssayInstance);
-        double idf=results.get("AverageIDF");
+        double idf=cnEssayInstance.getFeature("AverageIDF");
         double idfScore=((idf-IDF_MIN)/(IDF_MAX-IDF_MIN))*100;
         scores.put("idfScore",idfScore);
+        System.out.println("idfScore:"+idfScore);
         return scores;
     }
 }

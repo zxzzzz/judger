@@ -124,6 +124,8 @@ public class CNGaussianNormailizerFeature implements CNFeatures {
         return values;
     }
 
+
+    @Deprecated
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
         return null;

@@ -8,10 +8,12 @@
 特征： FourLengthWordRatio
 特征： MoreThanEightWordSentenceCount
 特征： MoreThanEightWordSentenceRatio
-特征： MoreThanNineWordSentenceCount
-特征： MoreThanNineWordSentenceRatio
-特征： MoreThanSevenWordSentenceCount
-特征： MoreThanSevenWordSentenceRatio
+特征： MoreThanSixWordSentenceCount
+特征： MoreThanSixWordSentenceRatio
+特征： MoreThanTenWordSentenceCount
+特征： MoreThanTenWordSentenceRatio
+特征： MoreThanTwelveWordSentenceCount
+特征： MoreThanTwelveWordSentenceRatio
 特征： Num_Chars
 特征： Num_PrePosition
 特征： Num_Pronoun
@@ -20,12 +22,6 @@
 特征： OOVs
 特征： OneLengthWordCount
 特征： OneLengthWordRatio
-特征： PercentMatches_是
-特征： PercentMatches_的
-特征： PercentMatches_这
-特征： PercentMatches_！
-特征： PercentMatches_，
-特征： PercentMatches_？
 特征： TTR
 特征： ThreeLengthWordCount
 特征： ThreeLengthWordRatio
@@ -46,10 +42,12 @@ FourLengthWordCount:9.0
 FourLengthWordRatio:0.0308
 MoreThanEightWordSentenceCount:11.0
 MoreThanEightWordSentenceRatio:0.2245
-MoreThanNineWordSentenceCount:8.0
-MoreThanNineWordSentenceRatio:0.1633
-MoreThanSevenWordSentenceCount:11.0
-MoreThanSevenWordSentenceRatio:0.2245
+MoreThanSixWordSentenceCount:15.0
+MoreThanSixWordSentenceRatio:0.3061
+MoreThanTenWordSentenceCount:7.0
+MoreThanTenWordSentenceRatio:0.1429
+MoreThanTwelveWordSentenceCount:1.0
+MoreThanTwelveWordSentenceRatio:0.0204
 Num_Chars:496.0
 Num_PrePosition:12.0
 Num_Pronoun:3.0
@@ -58,12 +56,6 @@ Num_Words:292.0
 OOVs:0.1747
 OneLengthWordCount:131.0
 OneLengthWordRatio:0.4486
-PercentMatches_\Q是\E:0.0
-PercentMatches_\Q的\E:0.0274
-PercentMatches_\Q这\E:0.0
-PercentMatches_\Q！\E:0.0
-PercentMatches_\Q，\E:0.0685
-PercentMatches_\Q？\E:0.0
 TTR:0.0015406153511771964
 ThreeLengthWordCount:19.0
 ThreeLengthWordRatio:0.0651
@@ -83,10 +75,12 @@ FourLengthWordCount:1.0
 FourLengthWordRatio:0.0076
 MoreThanEightWordSentenceCount:6.0
 MoreThanEightWordSentenceRatio:0.3
-MoreThanNineWordSentenceCount:5.0
-MoreThanNineWordSentenceRatio:0.25
-MoreThanSevenWordSentenceCount:6.0
-MoreThanSevenWordSentenceRatio:0.3
+MoreThanSixWordSentenceCount:8.0
+MoreThanSixWordSentenceRatio:0.4
+MoreThanTenWordSentenceCount:4.0
+MoreThanTenWordSentenceRatio:0.2
+MoreThanTwelveWordSentenceCount:3.0
+MoreThanTwelveWordSentenceRatio:0.15
 Num_Chars:210.0
 Num_PrePosition:8.0
 Num_Pronoun:0.0
@@ -95,12 +89,6 @@ Num_Words:132.0
 OOVs:0.1439
 OneLengthWordCount:64.0
 OneLengthWordRatio:0.4848
-PercentMatches_\Q是\E:0.0
-PercentMatches_\Q的\E:0.0379
-PercentMatches_\Q这\E:0.0076
-PercentMatches_\Q！\E:0.0
-PercentMatches_\Q，\E:0.0379
-PercentMatches_\Q？\E:0.0
 TTR:7.223632144523783E-4
 ThreeLengthWordCount:8.0
 ThreeLengthWordRatio:0.0606
@@ -120,10 +108,12 @@ FourLengthWordCount:1.0
 FourLengthWordRatio:0.0074
 MoreThanEightWordSentenceCount:7.0
 MoreThanEightWordSentenceRatio:0.35
-MoreThanNineWordSentenceCount:4.0
-MoreThanNineWordSentenceRatio:0.2
-MoreThanSevenWordSentenceCount:9.0
-MoreThanSevenWordSentenceRatio:0.45
+MoreThanSixWordSentenceCount:11.0
+MoreThanSixWordSentenceRatio:0.55
+MoreThanTenWordSentenceCount:3.0
+MoreThanTenWordSentenceRatio:0.15
+MoreThanTwelveWordSentenceCount:2.0
+MoreThanTwelveWordSentenceRatio:0.1
 Num_Chars:196.0
 Num_PrePosition:7.0
 Num_Pronoun:0.0
@@ -132,12 +122,6 @@ Num_Words:135.0
 OOVs:0.1704
 OneLengthWordCount:83.0
 OneLengthWordRatio:0.6148
-PercentMatches_\Q是\E:0.0
-PercentMatches_\Q的\E:0.0444
-PercentMatches_\Q这\E:0.0
-PercentMatches_\Q！\E:0.0
-PercentMatches_\Q，\E:0.0519
-PercentMatches_\Q？\E:0.0
 TTR:7.159706196342157E-4
 ThreeLengthWordCount:4.0
 ThreeLengthWordRatio:0.0296

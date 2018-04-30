@@ -48,6 +48,67 @@ public abstract class EssayInstance {
 
     ArrayList<ArrayList<ArrayList<String>>> cachedParse = null;
     HashMap<String, Double> features;
+    /**
+     * 正规化评分结果
+     */
+    HashMap<String,Double> nomalizeScores;
+
+    //关键词
+
+    List<String > keyWords;
+
+    //摘要
+    List<String> summarys;
+
+    //文本相似度
+    double similary;
+
+    //情极性
+
+    String sentimentPos;
+    //文本分类
+    String themeClassified;
+
+
+    public List<String> getKeyWords() {
+        return keyWords;
+    }
+
+    public void setKeyWords(List<String> keyWords) {
+        this.keyWords = keyWords;
+    }
+
+    public List<String> getSummarys() {
+        return summarys;
+    }
+
+    public void setSummarys(List<String> summarys) {
+        this.summarys = summarys;
+    }
+
+    public double getSimilary() {
+        return similary;
+    }
+
+    public void setSimilary(double similary) {
+        this.similary = similary;
+    }
+
+    public String getSentimentPos() {
+        return sentimentPos;
+    }
+
+    public void setSentimentPos(String sentimentPos) {
+        this.sentimentPos = sentimentPos;
+    }
+
+    public String getThemeClassified() {
+        return themeClassified;
+    }
+
+    public void setThemeClassified(String themeClassified) {
+        this.themeClassified = themeClassified;
+    }
 
     public EssayInstance() {
         this.features = new HashMap<>();
@@ -62,6 +123,18 @@ public abstract class EssayInstance {
         }
     }
 
+    public void setScore(HashMap<String ,Double> nomalizeScores){
+        for (String key : nomalizeScores.keySet()) {
+            if (nomalizeScores.containsKey(key))
+                nomalizeScores.put(key.concat("1"), nomalizeScores.get(key));
+            else
+                nomalizeScores.put(key, nomalizeScores.get(key));
+        }
+    }
+
+    public HashMap<String, Double> getNomalizeScores() {
+        return this.nomalizeScores;
+    }
 
     public void setFeature(String feature, double value) {
         features.put(feature, value);

@@ -71,20 +71,21 @@ public class CNSentenceLengthFeature implements CNFeatures {
         values.put("MoreThanEightWordSentenceRatio", DoubleUtil.stayTwoDec(new Double(moreThanEightWordSentenceCount / (double) numSentences)));
         values.put("MoreThanTenWordSentenceCount", new Double(moreThanTenWordSentenceCount));
         values.put("MoreThanTenWordSentenceRatio", DoubleUtil.stayTwoDec(new Double(moreThanTenWordSentenceCount / (double) numSentences)));
-        values.put("MoreThanTenWordSentenceCount", new Double(moreThanTwelveWordSentenceCount));
-        values.put("MoreThanTenWordSentenceRatio", DoubleUtil.stayTwoDec(new Double(moreThanTwelveWordSentenceCount / (double) numSentences)));
+        values.put("MoreThanTwelveWordSentenceCount", new Double(moreThanTwelveWordSentenceCount));
+        values.put("MoreThanTwelveWordSentenceRatio", DoubleUtil.stayTwoDec(new Double(moreThanTwelveWordSentenceCount / (double) numSentences)));
 
         if (Config.DEBUG) {
             System.out.println("句子数  numSentences for ID(" + instance.id + "): " + values.get("Num_Sentences"));
             System.out.println("平均句长  AverageSentenceLength for ID(" + instance.id + "): " + values.get("AverageSentenceLength"));
-            System.out.println("句长是大于6个词的句数  MoreThanSixWordSentenceCount for ID(" + instance.id + "): " + values.get("MoreThanSevenWordSentenceCount"));
+            System.out.println("句长是大于6个词的句数  MoreThanSixWordSentenceCount for ID(" + instance.id + "): " + values.get("MoreThanSixWordSentenceCount"));
             System.out.println("句长是大于8个词的句数  MoreThanEightWordSentenceCount for ID(" + instance.id + "): " + values.get("MoreThanEightWordSentenceCount"));
-            System.out.println("句长是大于10个词的句数  MoreThanTenWordSentenceCount for ID(" + instance.id + "): " + values.get("MoreThanNineWordSentenceCount"));
-            System.out.println("句长是大于6个词的比例  MoreThanSixWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanSevenWordSentenceRatio")*100+"%");
+            System.out.println("句长是大于10个词的句数  MoreThanTenWordSentenceCount for ID(" + instance.id + "): " + values.get("MoreThanTenWordSentenceCount"));
+            System.out.println("句长是大于12个词的句数 MoreThanTwelveWordSentenceCount for ID("+instance.id+"):"+values.get("MoreThanTwelveWordSentenceCount"));
+            System.out.println("句长是大于6个词的比例  MoreThanSixWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanSixWordSentenceRatio")*100+"%");
             System.out.println("句长是大于8个词的比例  MoreThanEightWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanEightWordSentenceRatio")*100+"%");
-            System.out.println("句长是大于10个词的比例  MoreThanTenWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanNineWordSentenceRatio")*100+"%");
-            System.out.println("句长是大于12个词的比例 MoreThanTwelveWordSentenceCount for ID("+instance.id+"):"+values.get("moreThanTwelveWordSentenceCount"));
-            System.out.println("句长是大于10个词的比例  MoreThanTwelveWordSentenceCount for ID(" + instance.id + "): " + values.get("MoreThanTwelveWordSentenceCount")*100+"%");
+            System.out.println("句长是大于10个词的比例  MoreThanTenWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanTenWordSentenceRatio")*100+"%");
+
+            System.out.println("句长是大于12个词的比例  MoreThanTwelveWordSentenceRatio for ID(" + instance.id + "): " + values.get("MoreThanTwelveWordSentenceRatio")*100+"%");
         }
         return values;
     }
@@ -92,20 +93,19 @@ public class CNSentenceLengthFeature implements CNFeatures {
     /**
      * 句长评分
      * sentenceLengthScore
-     * @param instance
+     * @param results 中文实例
      * @return
      */
     @Override
-    public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
+    public HashMap<String, Double> normalizeScore(CNEssayInstance results) {
         HashMap<String,Double> scores=new HashMap<>();
-        HashMap<String,Double> results=getFeatureScores(instance);
         //原始数据
-        double numSentence=results.get("Num_Sentences");
-        double averageSentenceLength=results.get("AverageSentenceLength");
-        double sixWordRatio=results.get("MoreThanSixWordSentenceRatio");
-        double eightWordRatio=results.get("MoreThanEightWordSentenceRatio");
-        double tenWordRatio=results.get("MoreThanTenWordSentenceRatio");
-        double twelveWordRatio=results.get("MoreThanTenWordSentenceRatio");
+        double numSentence=results.getFeature("Num_Sentences");
+        double averageSentenceLength=results.getFeature("AverageSentenceLength");
+        double sixWordRatio=results.getFeature("MoreThanSixWordSentenceRatio");
+        double eightWordRatio=results.getFeature("MoreThanEightWordSentenceRatio");
+        double tenWordRatio=results.getFeature("MoreThanTenWordSentenceRatio");
+        double twelveWordRatio=results.getFeature("MoreThanTenWordSentenceRatio");
 
         //得分-百分制
         double numSentenceScore=((numSentence-NUM_SENTENCE_MIN)/(NUM_SENTENCE_MAX-NUM_SENTENCE_MIN))*100;
@@ -120,6 +120,7 @@ public class CNSentenceLengthFeature implements CNFeatures {
                                     sixWordRatioScore*SIX_LENGTH_WEIGHT+eightWordRatioScore*EIGHT_LENGTH_WEIGHT+
                                     tenWordRatioScore*TEN_LENGTH_WEIGHT+twelveWordRatioScore*TWELVE_LENGTH_WEIGHT;
         scores.put("sentenceLengthScore",sentenceLenghtScore);
+        System.out.println("sentenceLengthScore"+sentenceLenghtScore);
         return scores;
     }
 }

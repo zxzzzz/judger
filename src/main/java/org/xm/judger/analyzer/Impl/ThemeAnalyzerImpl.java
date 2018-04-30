@@ -1,6 +1,8 @@
 package org.xm.judger.analyzer.Impl;
 
 import com.hankcs.hanlp.HanLP;
+import com.hankcs.hanlp.openapi.Operation;
+import com.hankcs.hanlp.openapi.impl.OperationImpl;
 import lombok.Data;
 import org.xm.judger.analyzer.ThemeAnalyzer;
 import org.xm.judger.domain.CNEssayInstance;
@@ -15,6 +17,7 @@ import java.util.List;
 @Data
 public class ThemeAnalyzerImpl implements ThemeAnalyzer {
 
+    Operation operation=new OperationImpl();
 
     @Deprecated
     public HashMap<Integer,Double> similary=null;
@@ -41,8 +44,10 @@ public class ThemeAnalyzerImpl implements ThemeAnalyzer {
         if (!useTheme){
             return 0;
         }
-        //todo Hanlp分词 待打包
-        return 0;
+        String theme =cnEssayInstances.get(0).essay;
+        String text =cnEssayInstances.get(1).essay;
+        double similarity =operation.textSimilarity(theme,text);
+        return similarity;
     }
 
 

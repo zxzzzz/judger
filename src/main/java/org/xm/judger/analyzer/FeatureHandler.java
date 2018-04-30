@@ -5,6 +5,7 @@ import org.xm.judger.features.chinese.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.xm.judger.analyzer.CNFeatureBuilder.saveARFFRealClass;
 
@@ -52,20 +53,6 @@ public class FeatureHandler {
         //句子连贯性特征
         CNFeatures coherenceFeature = new CNSentenceCoherenceFeature();
         CNFeaturesArrayList.add(coherenceFeature);
-        // 正规化
-        CNPercentMatchesFeature matches1=new CNPercentMatchesFeature("，");
-        CNFeaturesArrayList.add(matches1);
-        CNPercentMatchesFeature matches2 =new CNPercentMatchesFeature("！");
-        CNFeaturesArrayList.add(matches2);
-        CNPercentMatchesFeature matches3=new CNPercentMatchesFeature("？");
-        CNFeaturesArrayList.add(matches3);
-        CNPercentMatchesFeature matches4= new CNPercentMatchesFeature("的");
-        CNFeaturesArrayList.add(matches4);
-        CNFeatures theFeature = new CNPercentMatchesFeature("这");
-        CNFeaturesArrayList.add(theFeature);
-        CNPercentMatchesFeature yesFeature=new CNPercentMatchesFeature("是");
-        CNFeaturesArrayList.add(yesFeature);
-        // need dictionary
         //单词类型特征
         CNFeatures wordFeature = null;
         CNStopWordRatioFeature stopWordRatioFeature =null;
@@ -82,63 +69,58 @@ public class FeatureHandler {
         // 评分
         System.out.println("开始评分.......");
 
-        ////template
-
         for (CNEssayInstance instance : instances) {
             for (CNFeatures CNFeatures : CNFeaturesArrayList) {
                 instance.setFeature(CNFeatures.getFeatureScores(instance));
             }
         }
-        System.out.println("评分结束...");
-        //正规化各特征项分数
-        ArrayList<CNFeatures> normlizationFeatures = new ArrayList<>();
+        System.out.println("原始评分结束...");
+        //正规化得分
+        System.out.println("正规化得分.....");
+        //包括句长/词长/句子/IDF等特征
 
-        //min-max   未登录词占比/明显错误词占比/平均词长/文本相似度
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "OOVs"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "obvious_typos"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "TTR"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Verb_TTR"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Adverb_TTR"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_PrePosition"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_Pronoun"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_Chars"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordFeature, "Num_Words"));
+        for (CNEssayInstance instance:instances){
+            for (CNFeatures cnFeatures:CNFeaturesArrayList){
+                HashMap<String,Double> score =cnFeatures.getFeatureScores(instance);
+                instance.setScore(score);
+            }
+        }
+        //计算综合得分
+        for (CNEssayInstance text:instances) {
+            double comprehensiveScore =0;
+            HashMap<String,Double> score=text.getNomalizeScores();
+            for (String key : score.keySet()) {
+                switch (key) {
+                    case "idfScore":
+                        comprehensiveScore += CNIDFFeature.IDF_WEIGHT * score.get(key);
+                        break;
+                    case "overlapCoherenceScore":
+                        comprehensiveScore += CNSentenceCoherenceFeature.OVERLAP_COHERENCE_WEIGHT * score.get(key);
+                        break;
+                    case "sentenceLengthScore":
+                        comprehensiveScore += CNSentenceLengthFeature.SENTENCE_LENGTH_WEIGHT * score.get(key);
+                        break;
+                    case "stopScore":
+                        comprehensiveScore += CNStopWordRatioFeature.STOPWORD_WEIGHT * score.get(key);
+                        break;
+                    case "wordScore":
+                        comprehensiveScore += CNWordFeature.WORDFEATURE_WEIGHT * score.get(key);
+                        break;
+                    case "wordLengthScore":
+                        comprehensiveScore += CNWordLengthFeature.WORDLENGTH_WEIGHT * score.get(key);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            text.getNomalizeScores().put("comprehensiveScore",comprehensiveScore);
+            System.out.println("综合得分："+comprehensiveScore);
+        }
 
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "AverageWordLength"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "OneLengthWordRatio"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "ThreeLengthWordRatio"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "TwoLengthWordRatio"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, wordLengthFeature, "FourLengthWordRatio"));
-
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances, idfFeature, "AverageIDF"));
-
-
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,stopWordRatioFeature , "stopword_ratio"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "Num_Sentences"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "AverageSentenceLength"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "MoreThanSevenWordSentenceRatio"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "MoreThanEightWordSentenceRatio"));
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,sentenceLengthFeature , "MoreThanNineWordSentenceRatio"));
-
-        normlizationFeatures.add(new CNMinMaxNormalizerFeature(instances,coherenceFeature , "overlap_coherence"));
-
-        //高斯正规化
-        //
-        normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, idfFeature, "AverageIDF", CNGaussianNormailizerFeature.Type.ABS_ZSCORE));
-        normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, idfFeature, "AverageIDF", CNGaussianNormailizerFeature.Type.ZSCORE));
-        normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, coherenceFeature, "overlap_coherence", CNGaussianNormailizerFeature.Type.ZSCORE));
-        normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, coherenceFeature, "overlap_coherence", CNGaussianNormailizerFeature.Type.ABS_ZSCORE));
-        normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, theFeature, "PercentMatches_\\Q这\\E", CNGaussianNormailizerFeature.Type.ZSCORE));
-        normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, theFeature, "PercentMatches_\\Q这\\E", CNGaussianNormailizerFeature.Type.NORMAL_PROB));
-        normlizationFeatures.add(new CNGaussianNormailizerFeature(instances, theFeature, "PercentMatches_\\Q这\\E", CNGaussianNormailizerFeature.Type.ABS_ZSCORE));
-//        // compute normalization feature
-//        for (CNEssayInstance instance : instances) {
-//            for (CNFeatures feature : normlizationFeatures)
-//                instance.setFeature(feature.getFeatureScores(instance));
-//        }
-
+        System.out.println("正规化评分结束");
         return instances;
     }
+
 
     public static String arffEscapeName(String name) {
         name = name.replaceAll("\\\\Q|\\\\E", "");    // strip \\Q \\E

@@ -83,6 +83,12 @@ public class CNMinMaxNormalizerFeature implements CNFeatures {
         return result;
     }
 
+    /**
+     * 暂时不需要此特征
+     * @param instance
+     * @return
+     */
+    @Deprecated
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
         return null;
