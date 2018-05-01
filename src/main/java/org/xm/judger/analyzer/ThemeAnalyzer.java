@@ -38,9 +38,8 @@ public interface ThemeAnalyzer {
 
     /**
      * 主题相似度分析
-     * @param cnEssayInstances 主题与文章
      * @return
      */
-    public double themeSimilarity(ArrayList<CNEssayInstance> cnEssayInstances);
+    public double themeSimilarity(CNEssayInstance theme,CNEssayInstance text);
 
     }

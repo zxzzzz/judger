@@ -40,13 +40,12 @@ public class ThemeAnalyzerImpl implements ThemeAnalyzer {
 
 
     @Override
-    public double themeSimilarity(ArrayList<CNEssayInstance> cnEssayInstances){
+    public double themeSimilarity(CNEssayInstance theme,CNEssayInstance text){
         if (!useTheme){
             return 0;
         }
-        String theme =cnEssayInstances.get(0).essay;
-        String text =cnEssayInstances.get(1).essay;
-        double similarity =operation.textSimilarity(theme,text);
+        double similarity =operation.textSimilarity(theme.essay,text.essay);
+
         return similarity;
     }
 

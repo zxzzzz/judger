@@ -43,10 +43,10 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
         ArrayList<CNEssayInstance> allInstances = new ArrayList<>();
         try {
-            ArrayList<CNEssayInstance> themeInstances = parser.load(themePath);
-            ArrayList<CNEssayInstance> textInstances = parser.load(textPath);
-            allInstances.add(themeInstances.get(0));
-            allInstances.add(textInstances.get(0));
+            CNEssayInstance themeInstances = parser.loadText(themePath);
+            CNEssayInstance textInstances = parser.loadText(textPath);
+            allInstances.add(themeInstances);
+            allInstances.add(textInstances);
 
         } catch (IOException e) {
             System.out.println("加载文章数据失败！" + e);
@@ -74,18 +74,26 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
     @Override
     public CNEssayInstance automaticScoring(String themePath, String textPath) {
         //1.转换
-        ArrayList<CNEssayInstance> instances = convertToCN(themePath,textPath);
+        CNEssayInstanceParser parser=new CNEssayInstanceParser();
+        CNEssayInstance theme =null;
+        CNEssayInstance text =null;
+        try {
 
 
-        //待评分文本
-        ArrayList<CNEssayInstance> text=new ArrayList<>();
+            theme= parser.loadText(themePath);
+            text =parser.loadText(textPath);
 
-        text.add( instances.get(1));
+        }catch (IOException e){
+            System.out.println(e);
 
+        }
+
+        ArrayList<CNEssayInstance> cnEssayInstances =new ArrayList<>();
+        cnEssayInstances.add(text);
 
         //篇章特征评分
 
-        ArrayList<CNEssayInstance> processText =FeatureHandler.getFeatures(text);
+        ArrayList<CNEssayInstance> processText =FeatureHandler.getFeatures(cnEssayInstances);
 
         //文章
         CNEssayInstance cnText =processText.get(0);
@@ -94,17 +102,20 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
         ThemeAnalyzer themeAnalyzer =new ThemeAnalyzerImpl();
 
         //关键词
-        List<String > keyWords=themeAnalyzer.getKeyWords(processText.get(0),KEY_WORD_SIZE);
+        List<String > keyWords=themeAnalyzer.getKeyWords(cnText,KEY_WORD_SIZE);
 
         cnText.setKeyWords(keyWords);
 
         //摘要
 
         List<String > summarys =themeAnalyzer.getSummary(cnText,SUMMARY_SIZE);
+
         cnText.setSummarys(summarys);
+
         //主题评分
+
         //主题相似度
-        double similarity =themeAnalyzer.themeSimilarity(instances);
+        double similarity =themeAnalyzer.themeSimilarity(theme,cnText);
 
         cnText.setSimilary(similarity);
 

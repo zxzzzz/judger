@@ -23,6 +23,27 @@ public class CNEssayInstanceParser {
     public static final Pattern escapedDoubleQuote = Pattern.compile("\"\"");
 
     /**
+     * 根据文章路径加载文章
+     */
+    public CNEssayInstance loadText(String textPath) throws IOException{
+        File file =new File(textPath);
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+        String line;
+        List<String> wordList = new LinkedList<>();
+        while ((line = br.readLine()) != null) {
+            if (line.length() == 0) continue;
+            wordList.add(line);
+        }
+        br.close();
+        CNEssayInstance essay = new CNEssayInstance();
+        essay.id = 1;
+        essay.essay = wordList.toString();
+        essay.filename = file.getName();
+        essay.title = file.getName();
+        return essay;
+    }
+    /**
      * Load documents from disk
      * 加载文章
      * @param folderPath is a folder, which contains text documents.
