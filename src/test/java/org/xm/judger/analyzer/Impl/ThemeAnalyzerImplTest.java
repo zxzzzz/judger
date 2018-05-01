@@ -14,7 +14,7 @@ class ThemeAnalyzerImplTest {
 
     private static final String path1 ="data/law/law01.txt";
     private static final String path2 ="data/law/law02.txt";
-    private ThemeAnalyzer themeAnalyzer=new ThemeAnalyzerImpl();
+    private ThemeAnalyzer themeAnalyzer=new ThemeAnalyzer();
     private CNEssayInstanceParser parser =new CNEssayInstanceParser();
     @Test
     void getKeyWords() throws IOException {

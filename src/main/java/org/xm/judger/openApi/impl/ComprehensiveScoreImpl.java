@@ -1,12 +1,11 @@
 package org.xm.judger.openApi.impl;
 
-import org.xm.judger.Judger;
 import org.xm.judger.analyzer.FeatureHandler;
-import org.xm.judger.analyzer.Impl.TextTendencyAnalyzerImpl;
-import org.xm.judger.analyzer.Impl.ThemeAnalyzerImpl;
 import org.xm.judger.analyzer.TextTendencyAnalyzer;
 import org.xm.judger.analyzer.ThemeAnalyzer;
 import org.xm.judger.domain.CNEssayInstance;
+import org.xm.judger.domain.Config;
+import org.xm.judger.features.chinese.CNFeatures;
 import org.xm.judger.openApi.ComprehensiveScore;
 import org.xm.judger.parser.CNEssayInstanceParser;
 
@@ -71,6 +70,22 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
         return null;
     }
 
+    /**
+     * 计算最终分数
+     * @param essayInstance
+     * @return
+     */
+    private CNEssayInstance getAllScore(CNEssayInstance essayInstance){
+        HashMap<String,Double> scores=essayInstance.getNomalizeScores();
+        double structure =scores.get("comprehensiveScore");
+        double textTendency =scores.get("textTendencyScore");
+        double themeScore =scores.get("themeScore");
+        double allScore =structure*Config.STRUCTURE_WEIGHT+textTendency*Config.TEXT_TENDENCY_WEIGHT+themeScore*Config.THEME_WIGHT;
+        essayInstance.getNomalizeScores().put("finalScore",allScore);
+        return essayInstance;
+
+    }
+
     @Override
     public CNEssayInstance automaticScoring(String themePath, String textPath) {
         //1.转换
@@ -99,7 +114,7 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
         CNEssayInstance cnText =processText.get(0);
 
         //主题评分
-        ThemeAnalyzer themeAnalyzer =new ThemeAnalyzerImpl();
+        ThemeAnalyzer themeAnalyzer =new ThemeAnalyzer();
 
         //关键词
         List<String > keyWords=themeAnalyzer.getKeyWords(cnText,KEY_WORD_SIZE);
@@ -120,13 +135,20 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
         cnText.setSimilary(similarity);
 
         //文本倾向性
-        TextTendencyAnalyzer textTendencyAnalyzer=new TextTendencyAnalyzerImpl();
+        TextTendencyAnalyzer textTendencyAnalyzer=new TextTendencyAnalyzer();
         //文章分类
 
-        String category = textTendencyAnalyzer.themeAnalyzer(cnText.essay);
-        String sentimentPos=textTendencyAnalyzer.sentimentPos(cnText.essay);
+        String category = textTendencyAnalyzer.themeAnalyzer(cnText);
+        String sentimentPos=textTendencyAnalyzer.sentimentPos(cnText);
         cnText.setSentimentPos(sentimentPos);
         cnText.setThemeClassified(category);
+        textTendencyAnalyzer.getTextTendencyScore(cnText);
+        themeAnalyzer.getThemeScore(cnText);
+        getAllScore(cnText);
+        System.out.println("篇章结构得分："+cnText.getNomalizeScores().get("comprehensiveScore"));
+        System.out.println("文本倾向性得分："+cnText.getNomalizeScores().get("textTendencyScore"));
+        System.out.println("主题得分："+cnText.getNomalizeScores().get("themeScore"));
+        System.out.println("最终得分:"+cnText.getNomalizeScores().get("finalScore"));
 
         return cnText;
     }

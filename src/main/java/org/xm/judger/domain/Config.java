@@ -26,4 +26,17 @@ public class   Config {
      */
     public static final String CN_TRAIN_SET_PATH = "Phase1/cn_training_set_rel1.tsv";
 
+    /**
+     * 篇章结构得分占比
+     */
+    public static final double STRUCTURE_WEIGHT =0.4;
+    /**
+     * 主题得分占比
+     */
+    public static final double THEME_WIGHT=0.3;
+    /**
+     * 文本倾向性得分占比
+     */
+    public static final double TEXT_TENDENCY_WEIGHT=0.3;
+
 }

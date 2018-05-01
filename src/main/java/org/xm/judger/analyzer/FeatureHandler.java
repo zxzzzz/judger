@@ -114,7 +114,7 @@ public class FeatureHandler {
                 }
             }
             text.getNomalizeScores().put("comprehensiveScore",comprehensiveScore);
-            System.out.println("综合得分："+comprehensiveScore);
+            System.out.println("篇章得分："+comprehensiveScore);
         }
 
         System.out.println("正规化评分结束");

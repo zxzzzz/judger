@@ -1,7 +1,7 @@
 package org.xm.judger.domain;
 
 import org.junit.Test;
-import org.xm.judger.analyzer.Impl.ThemeAnalyzerImpl;
+import org.xm.judger.analyzer.ThemeAnalyzer;
 import org.xm.judger.parser.CNEssayInstanceParser;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class ThemeTest {
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
         // Parse the input training file
         ArrayList<CNEssayInstance> instances = parser.load(trainSetPath);
-        ThemeAnalyzerImpl themeAnalyzerImpl =new ThemeAnalyzerImpl();
+        ThemeAnalyzer themeAnalyzerImpl =new ThemeAnalyzer();
         for (CNEssayInstance instance:instances){
             List<String> key= themeAnalyzerImpl.getKeyWords(instance,5);
             List<String> summary= themeAnalyzerImpl.getSummary(instance,3);
@@ -42,7 +42,7 @@ public class ThemeTest {
         CNEssayInstanceParser parser = new CNEssayInstanceParser();
         // Parse the input training file
         ArrayList<CNEssayInstance> instances = parser.load(trainSetPath);
-        ThemeAnalyzerImpl themeAnalyzerImpl =new ThemeAnalyzerImpl();
+        ThemeAnalyzer themeAnalyzerImpl =new ThemeAnalyzer();
         for (CNEssayInstance instance : instances) {
             List<String> summary= themeAnalyzerImpl.getSummary(instance,3);
             summary.forEach(p->System.out.println(p));

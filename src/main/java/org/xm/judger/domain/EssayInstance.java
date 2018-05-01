@@ -48,7 +48,7 @@ public abstract class EssayInstance {
 
     ArrayList<ArrayList<ArrayList<String>>> cachedParse = null;
 
-    HashMap<String, Double> features;
+    HashMap<String, Double> features ;
     /**
      * 正规化评分结果
      */
@@ -62,13 +62,13 @@ public abstract class EssayInstance {
     List<String> summarys =new ArrayList<>();
 
     //文本相似度
-    double similary;
+    double similary =0;
 
     //情极性
 
-    String sentimentPos;
+    String sentimentPos ="";
     //文本分类
-    String themeClassified;
+    String themeClassified ="";
 
 
     public List<String> getKeyWords() {
