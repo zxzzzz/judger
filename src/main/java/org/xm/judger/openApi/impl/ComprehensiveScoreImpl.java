@@ -40,33 +40,20 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
      */
     public ArrayList<CNEssayInstance> convertToCN(String themePath, String textPath) {
 
-        CNEssayInstanceParser parser=new CNEssayInstanceParser();
-        ArrayList<CNEssayInstance> allInstances =new ArrayList<>();
+        CNEssayInstanceParser parser = new CNEssayInstanceParser();
+        ArrayList<CNEssayInstance> allInstances = new ArrayList<>();
         try {
-            ArrayList<CNEssayInstance> themeInstances =parser.load(themePath);
-            ArrayList<CNEssayInstance> textInstances =parser.load(textPath);
+            ArrayList<CNEssayInstance> themeInstances = parser.load(themePath);
+            ArrayList<CNEssayInstance> textInstances = parser.load(textPath);
             allInstances.add(themeInstances.get(0));
             allInstances.add(textInstances.get(0));
 
-        }catch (IOException e){
-            System.out.println("加载文章数据失败！"+e);
+        } catch (IOException e) {
+            System.out.println("加载文章数据失败！" + e);
             System.exit(1);
         }
         return allInstances;
     }
-
-    //        CNEssayInstanceParser parser = new CNEssayInstanceParser();
-//        // Parse the input training file
-//        ArrayList<CNEssayInstance> instances = parser.load(trainSetPath);
-//        Judger.setCninstances(instances);
-//
-//        // Get feature Scores for each instance
-//        ArrayList<CNEssayInstance> instancesFeatures = FeatureHandler.getFeatures(instances);
-//
-//        // Now we have all the instances and features
-//        // use any Machine Learning Tools (such as Weka)
-//        FeatureHandler.saveFeatures(instancesFeatures, saveTrainFeaturesPath);
-
 
     @Override
     public HashMap<String, Double> getComprehensiveScore(ArrayList<CNEssayInstance> cnEssayInstances) {
@@ -129,7 +116,6 @@ public class ComprehensiveScoreImpl implements ComprehensiveScore {
         String sentimentPos=textTendencyAnalyzer.sentimentPos(cnText.essay);
         cnText.setSentimentPos(sentimentPos);
         cnText.setThemeClassified(category);
-
 
         return cnText;
     }

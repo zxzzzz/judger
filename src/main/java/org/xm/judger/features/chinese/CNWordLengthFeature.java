@@ -20,27 +20,27 @@ public class CNWordLengthFeature implements CNFeatures {
 
     //todo 词长权重/特征项范围待分析
     //词长特征权重
-    public static final double WORDLENGTH_WEIGHT=0;
+    public static final double WORDLENGTH_WEIGHT=0.2;
     // 特征的范围
-    private static final double AVERAGE_MIN=0;
-    private static final double AVERAGE_MAX=0;
-    private static final double ONE_MIN=0;
-    private static final double ONE_MAX=0;
-    private static final double TWO_MIN=0;
-    private static final double TWO_MAX=0;
-    private static final double THREE_MIN=0;
-    private static final double THREE_MAX=0;
+    private static final double AVERAGE_MIN=1;
+    private static final double AVERAGE_MAX=3;
+    private static final double ONE_MIN=0.1;
+    private static final double ONE_MAX=0.6;
+    private static final double TWO_MIN=0.1;
+    private static final double TWO_MAX=0.5;
+    private static final double THREE_MIN=0.01;
+    private static final double THREE_MAX=0.2;
     private static final double FOUR_MIN=0;
-    private static final double FOUR_MAX=0;
-    private static final double NUM_MIN=0;
-    private static final double NUM_MAX=0;
+    private static final double FOUR_MAX=0.1;
+    private static final double NUM_MIN=50;
+    private static final double NUM_MAX=400;
     //各特征项的权重
-    private static final double AVERAGE_WEIGHT=0;
-    private static final double ONE_WEIGHT=0;
-    private static final double TWO_WEIGHT=0;
-    private static final double THREE_WEIGHT=0;
-    private static final double FOUR_WEIGHT=0;
-    private static final double NUM_WEIGHT=0;
+    private static final double AVERAGE_WEIGHT=0.3;
+    private static final double ONE_WEIGHT=0.1;
+    private static final double TWO_WEIGHT=0.1;
+    private static final double THREE_WEIGHT=0.1;
+    private static final double FOUR_WEIGHT=0.1;
+    private static final double NUM_WEIGHT=0.3;
 
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
@@ -95,7 +95,8 @@ public class CNWordLengthFeature implements CNFeatures {
             System.out.println("词长为2的单词数占比  TwoLengthWordRatio for ID(" + instance.id + "): " + values.get("TwoLengthWordRatio")*100+"%");
             System.out.println("词长为3的单词数占比  ThreeLengthWordRatio for ID(" + instance.id + "): " + values.get("ThreeLengthWordRatio")*100+"%");
             System.out.println("词长为4的单词数占比  FourLengthWordRatio for ID(" + instance.id + "): " + values.get("FourLengthWordRatio")*100+"%");
-        return values;
+            System.out.println("单词总数 wordNum" +instance.id+"):"+values.get("WordsNum"));
+            return values;
     }
 
     /**
@@ -111,18 +112,19 @@ public class CNWordLengthFeature implements CNFeatures {
         //todo 词长的评分标准
         HashMap<String,Double> scores=new HashMap<>();
         double averageLength=result.getFeature("AverageWordLength");
-        double oneNum=result.getFeature("OneLengthWordCount");
-        double twoNum=result.getFeature("TwoLengthWordCount");
-        double threeNum=result.getFeature("ThreeLengthWordCount");
-        double fourNum=result.getFeature("FourLengthWordCount");
+        double oneRatio=result.getFeature("OneLengthWordRatio");
+        double twoRatio=result.getFeature("TwoLengthWordRatio");
+        double threeRatio=result.getFeature("ThreeLengthWordRatio");
+        double fourRatio=result.getFeature("FourLengthWordRatio");
         double num=result.getFeature("WordsNum");
         double averageScore =((averageLength-AVERAGE_MIN)/(AVERAGE_MAX-AVERAGE_MIN))*100;
-        double oneScore=((oneNum-ONE_MIN)/(ONE_MAX-ONE_MIN))*100;
-        double twoScore=((twoNum-TWO_MIN)/(TWO_MAX-TWO_MIN))*100;
-        double threeScore=((threeNum-THREE_MIN)/(THREE_MAX-THREE_MIN))*100;
-        double fourScore=((fourNum-FOUR_MIN)/(FOUR_MAX-FOUR_MIN))*100;
+        double oneScore=((oneRatio-ONE_MIN)/(ONE_MAX-ONE_MIN))*100;
+        double twoScore=((twoRatio-TWO_MIN)/(TWO_MAX-TWO_MIN))*100;
+        double threeScore=((threeRatio-THREE_MIN)/(THREE_MAX-THREE_MIN))*100;
+        double fourScore=((fourRatio-FOUR_MIN)/(FOUR_MAX-FOUR_MIN))*100;
         double numScore=((num-NUM_MIN)/(NUM_MAX-NUM_MIN))*100;
-        double lengthScore=averageScore*AVERAGE_WEIGHT+oneNum*ONE_WEIGHT+twoNum*TWO_WEIGHT+threeScore*THREE_WEIGHT+fourScore*FOUR_WEIGHT+numScore*NUM_WEIGHT;
+        double lengthScore=averageScore*AVERAGE_WEIGHT+oneScore*ONE_WEIGHT+twoScore*TWO_WEIGHT+threeScore*THREE_WEIGHT+fourScore*FOUR_WEIGHT+numScore*NUM_WEIGHT;
+        lengthScore=DoubleUtil.processScore(lengthScore);
         scores.put("wordLengthScore",lengthScore);
         System.out.println("wordLengthScore:"+lengthScore);
         return scores;

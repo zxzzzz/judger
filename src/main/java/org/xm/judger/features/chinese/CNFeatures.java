@@ -8,6 +8,7 @@ import java.util.HashMap;
  * @author xuming
  */
 public interface CNFeatures {
+
     /**
      * get feature score for each chinese essay instance
      * 特征分数
@@ -20,5 +21,7 @@ public interface CNFeatures {
      * 特征项得分
      */
     HashMap<String,Double> normalizeScore(CNEssayInstance instance);
+
+
 
 }

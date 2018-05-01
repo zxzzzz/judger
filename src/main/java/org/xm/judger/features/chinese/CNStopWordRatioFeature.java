@@ -19,10 +19,10 @@ import java.util.HashSet;
 public class CNStopWordRatioFeature implements CNFeatures {
 
     //todo 停用词权重 /范围待分析
-    public static final double STOPWORD_WEIGHT=0;
+    public static final double STOPWORD_WEIGHT=0.1;
     //停用词特征项的范围
     private static final double STOPWORD_MIN=0;
-    private static final double STOPWORD_MAX=0;
+    private static final double STOPWORD_MAX=0.5;
 
 
     HashSet<String> stopwords;
@@ -76,6 +76,7 @@ public class CNStopWordRatioFeature implements CNFeatures {
         HashMap<String,Double> scores=new HashMap<>();
         double value=instance.getFeature("stopword_ratio");
         double score=((value-STOPWORD_MIN)/(STOPWORD_MAX-STOPWORD_MIN))*100;
+        score=DoubleUtil.processScore(score);
         scores.put("stopScore",score);
         System.out.println("stopScore:"+score);
         return scores;

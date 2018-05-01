@@ -27,37 +27,37 @@ public class CNWordFeature implements CNFeatures {
             "$", ":", "：", ";", "；", "“", "”", "《", "》"};
     //todo word feature 范围/特征项权重/综合权重待分析
     //WordFeature的权重
-    public static final double WORDFEATURE_WEIGHT=0;
+    public static final double WORDFEATURE_WEIGHT=0.3;
     //特征项范围
     private static final double UNREGISTER_MIN=0;
-    private static final double UNREGISTER_MAX=0;
+    private static final double UNREGISTER_MAX=0.2;
     private static final double ERRORWORD_MIN=0;
-    private static final double ERRORWORD_MAX=0;
+    private static final double ERRORWORD_MAX=0.2;
     private static final double TTR_MIN=0;
-    private static final double TTR_MAX=0;
+    private static final double TTR_MAX=0.2;
     private static final double VERBTTR_MIN=0;
-    private static final double VERBTTR_MAX=0;
+    private static final double VERBTTR_MAX=0.05;
     private static final double ADTTR_MIN=0;
-    private static final double ADTTR_MAX=0;
+    private static final double ADTTR_MAX=0.01;
     private static final double NUMPRE_MIN=0;
-    private static final double NUMPRE_MAX=0;
+    private static final double NUMPRE_MAX=30;
     private static final double NUMPRO_MIN=0;
-    private static final double NUMPRO_MAX=0;
-    private static final double NUMCHARS_MIN=0;
-    private static final double NUMCHARS_MAX=0;
-    private static final double NUMWORD_MIN=0;
-    private static final double NUMWORD_MAX=0;
+    private static final double NUMPRO_MAX=30;
+    private static final double NUMCHARS_MIN=100;
+    private static final double NUMCHARS_MAX=2000;
+    private static final double NUMWORD_MIN=20;
+    private static final double NUMWORD_MAX=1000;
 
     //特征项权重
-    private static final double UNREGISTER_WEIGHT=0;
-    private static final double ERRORWORD_WEIGHT=0;
-    private static final double TTR_WEIGHT=0;
-    private static final double VERBTTR_WEIGHT=0;
-    private static final double ADTTR_WEIGHT=0;
-    private static final double NUMPRE_WEIGHT=0;
-    private static final double NUMPRO_WEIGHT=0;
-    private static final double NUMCHARS_WEIGHT=0;
-    private static final double NUMWORD_WEIGHT=0;
+    private static final double UNREGISTER_WEIGHT=0.1;
+    private static final double ERRORWORD_WEIGHT=0.1;
+    private static final double TTR_WEIGHT=0.1;
+    private static final double VERBTTR_WEIGHT=0.05;
+    private static final double ADTTR_WEIGHT=0.05;
+    private static final double NUMPRE_WEIGHT=0.1;
+    private static final double NUMPRO_WEIGHT=0.1;
+    private static final double NUMCHARS_WEIGHT=0.2;
+    private static final double NUMWORD_WEIGHT=0.2;
 
     @Override
     public HashMap<String, Double> getFeatureScores(CNEssayInstance instance) {
@@ -139,7 +139,7 @@ public class CNWordFeature implements CNFeatures {
         double unRegisterScore=((unRegister-UNREGISTER_MIN)/(UNREGISTER_MAX-UNREGISTER_MIN))*100;
         double errorWordScore=((errorWord-ERRORWORD_MIN)/(ERRORWORD_MAX-ERRORWORD_MIN))*100;
         double ttrScore=((ttr-TTR_MIN)/(TTR_MAX-TTR_MIN))*100;
-        double verbTtrScore=((verbTtr-TTR_MIN)/(TTR_MAX-TTR_MIN))*100;
+        double verbTtrScore=((verbTtr-VERBTTR_MIN)/(VERBTTR_MAX-VERBTTR_MIN))*100;
         double adTtrScore=((adTtr-ADTTR_MIN)/(ADTTR_MAX-ADTTR_MIN))*100;
         double numPreScore=((numPre-NUMPRE_MIN)/(NUMPRE_MAX-NUMPRE_MIN))*100;
         double numProScore=((numPro-NUMPRO_MIN)/(NUMPRO_MAX-NUMPRO_MIN))*100;
@@ -150,7 +150,7 @@ public class CNWordFeature implements CNFeatures {
         double wordScore=unRegisterScore*UNREGISTER_WEIGHT+errorWordScore*ERRORWORD_WEIGHT+ttrScore*TTR_WEIGHT+
                 verbTtrScore*TTR_WEIGHT+verbTtrScore*VERBTTR_WEIGHT+adTtrScore*ADTTR_WEIGHT+numPreScore*NUMPRE_WEIGHT+
                 numProScore*NUMPRO_WEIGHT+numCharsScore*NUMCHARS_WEIGHT+numWordScore*NUMWORD_WEIGHT;
-
+        wordScore =DoubleUtil.processScore(wordScore);
         scores.put("wordScore",wordScore);
         System.out.println("word-score："+wordScore);
         return scores;

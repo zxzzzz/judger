@@ -47,18 +47,19 @@ public abstract class EssayInstance {
     public int rater3_trait6 = -1;
 
     ArrayList<ArrayList<ArrayList<String>>> cachedParse = null;
+
     HashMap<String, Double> features;
     /**
      * 正规化评分结果
      */
-    HashMap<String,Double> nomalizeScores;
+    HashMap<String,Double> nomalizeScores =new HashMap<>();
 
     //关键词
 
-    List<String > keyWords;
+    List<String > keyWords =new ArrayList<>();
 
     //摘要
-    List<String> summarys;
+    List<String> summarys =new ArrayList<>();
 
     //文本相似度
     double similary;
@@ -123,12 +124,9 @@ public abstract class EssayInstance {
         }
     }
 
-    public void setScore(HashMap<String ,Double> nomalizeScores){
-        for (String key : nomalizeScores.keySet()) {
-            if (nomalizeScores.containsKey(key))
-                nomalizeScores.put(key.concat("1"), nomalizeScores.get(key));
-            else
-                nomalizeScores.put(key, nomalizeScores.get(key));
+    public void setScore(HashMap<String ,Double> nomalize){
+        for (String key:nomalize.keySet()) {
+                nomalizeScores.put(key, nomalize.get(key));
         }
     }
 

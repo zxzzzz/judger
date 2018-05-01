@@ -19,9 +19,9 @@ import java.util.HashSet;
 public class CNIDFFeature implements CNFeatures {
     //todo  TF_IDF特征权重/特征项范围的分析
 
-    public static final double IDF_WEIGHT=0;
-    private static final double IDF_MIN=0;
-    private static final double IDF_MAX=0;
+    public static final double IDF_WEIGHT=0.1;
+    private static final double IDF_MIN=0.4;
+    private static final double IDF_MAX=1.0;
 
     HashMap<String, double[]> idf;
 
@@ -89,6 +89,7 @@ public class CNIDFFeature implements CNFeatures {
         HashMap<String,Double> scores=new HashMap<>();
         double idf=cnEssayInstance.getFeature("AverageIDF");
         double idfScore=((idf-IDF_MIN)/(IDF_MAX-IDF_MIN))*100;
+        idfScore =DoubleUtil.processScore(idfScore);
         scores.put("idfScore",idfScore);
         System.out.println("idfScore:"+idfScore);
         return scores;

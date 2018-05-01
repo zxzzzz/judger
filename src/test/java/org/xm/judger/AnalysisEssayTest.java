@@ -33,7 +33,7 @@ public class AnalysisEssayTest {
 
     @Test
     public void testCN_law() throws IOException {
-        String trainSetPath = "data/law";
+        String trainSetPath = "data/novels";
         String saveTrainFeaturesPath = "data/law.arff";
 
         CNEssayInstanceParser parser = new CNEssayInstanceParser();

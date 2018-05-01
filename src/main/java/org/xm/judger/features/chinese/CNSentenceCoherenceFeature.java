@@ -3,6 +3,7 @@ package org.xm.judger.features.chinese;
 
 import org.xm.judger.domain.CNEssayInstance;
 import org.xm.judger.domain.Config;
+import org.xm.judger.util.DoubleUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,10 +17,10 @@ import java.util.HashSet;
 public class CNSentenceCoherenceFeature implements CNFeatures {
 
     // todo 句子连贯性特征权重/范围
-    public static final  double OVERLAP_COHERENCE_WEIGHT =0;
+    public static final  double OVERLAP_COHERENCE_WEIGHT =0.1;
     //特征项范围
     private static final double OVERLAP_COHERENCE_MIN=0;
-    private static final double OVERLAP_COHERENCE_MAX=0;
+    private static final double OVERLAP_COHERENCE_MAX=0.3;
 
 
     @Override
@@ -61,9 +62,9 @@ public class CNSentenceCoherenceFeature implements CNFeatures {
     @Override
     public HashMap<String, Double> normalizeScore(CNEssayInstance instance) {
         HashMap<String,Double> scores=new HashMap<>();
-        HashMap<String,Double> results=getFeatureScores(instance);
-        double overlapCoherence=results.get("overlap_coherence");
+        double overlapCoherence=instance.getFeature("overlap_coherence");
         double overlapCoherenceScore=((overlapCoherence-OVERLAP_COHERENCE_MIN)/(OVERLAP_COHERENCE_MAX-OVERLAP_COHERENCE_MIN))*100;
+        overlapCoherenceScore=DoubleUtil.processScore(overlapCoherenceScore);
         scores.put("overlapCoherenceScore",overlapCoherenceScore);
         System.out.println("overlapCoherenceScore:"+overlapCoherenceScore);
         return scores;

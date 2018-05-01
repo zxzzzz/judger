@@ -16,28 +16,28 @@ import java.util.HashMap;
 public class CNSentenceLengthFeature implements CNFeatures {
 
     //todo 句长特征权重/范围/各特征项权重 待分析
-    public static final double SENTENCE_LENGTH_WEIGHT=0;
+    public static final double SENTENCE_LENGTH_WEIGHT=0.2;
     //特征项范围
-    private static final double NUM_SENTENCE_MIN=0;
-    private static final double NUM_SENTENCE_MAX=0;
-    private static final double AVERAGE_LENGTH_MIN=0;
-    private static final double AVERAGE_LENGTH_MAX=0;
+    private static final double NUM_SENTENCE_MIN=20;
+    private static final double NUM_SENTENCE_MAX=100;
+    private static final double AVERAGE_LENGTH_MIN=3;
+    private static final double AVERAGE_LENGTH_MAX=10;
     private static final double SIX_LENGTH_MIN=0;
-    private static final double SIX_LENGTH_MAX=0;
+    private static final double SIX_LENGTH_MAX=0.5;
     private static final double EIGHT_LENGTH_MIN=0;
-    private static final double EIGHT_LENGHT_MAX=0;
+    private static final double EIGHT_LENGHT_MAX=0.5;
     private static final double TEN_LENGHT_MIN=0;
-    private static final double TEN_LENGHT_MAX=0;
+    private static final double TEN_LENGHT_MAX=0.4;
     private static final double TWELVE_LENGTH_MIN=0;
-    private static final double TWELVE_LENGHT_MAX=0;
+    private static final double TWELVE_LENGHT_MAX=0.4;
 
     //特征项权重
-    private static final double NUM_SENTENCE_WEIGHT=0;
-    private static final double AVERAGE_LENGTH_WEIGHT=0;
-    private static final double SIX_LENGTH_WEIGHT=0;
-    private static final double EIGHT_LENGTH_WEIGHT=0;
-    private static final double TEN_LENGTH_WEIGHT=0;
-    private static final double TWELVE_LENGTH_WEIGHT=0;
+    private static final double NUM_SENTENCE_WEIGHT=0.2;
+    private static final double AVERAGE_LENGTH_WEIGHT=0.2;
+    private static final double SIX_LENGTH_WEIGHT=0.1;
+    private static final double EIGHT_LENGTH_WEIGHT=0.1;
+    private static final double TEN_LENGTH_WEIGHT=0.2;
+    private static final double TWELVE_LENGTH_WEIGHT=0.2;
 
 
     @Override
@@ -119,6 +119,7 @@ public class CNSentenceLengthFeature implements CNFeatures {
         double sentenceLenghtScore=numSentenceScore*NUM_SENTENCE_WEIGHT+averageSentenceLengthScore*AVERAGE_LENGTH_WEIGHT+
                                     sixWordRatioScore*SIX_LENGTH_WEIGHT+eightWordRatioScore*EIGHT_LENGTH_WEIGHT+
                                     tenWordRatioScore*TEN_LENGTH_WEIGHT+twelveWordRatioScore*TWELVE_LENGTH_WEIGHT;
+        sentenceLenghtScore=DoubleUtil.processScore(sentenceLenghtScore);
         scores.put("sentenceLengthScore",sentenceLenghtScore);
         System.out.println("sentenceLengthScore"+sentenceLenghtScore);
         return scores;

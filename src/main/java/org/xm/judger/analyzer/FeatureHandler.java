@@ -81,7 +81,7 @@ public class FeatureHandler {
 
         for (CNEssayInstance instance:instances){
             for (CNFeatures cnFeatures:CNFeaturesArrayList){
-                HashMap<String,Double> score =cnFeatures.getFeatureScores(instance);
+                HashMap<String,Double> score =cnFeatures.normalizeScore(instance);
                 instance.setScore(score);
             }
         }
